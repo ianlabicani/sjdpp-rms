@@ -98,6 +98,16 @@
                             </div>
                         </a>
 
+                        <a href="{{ route('secretary.confirmation.index') }}" class="flex items-center p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition group">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-hands-praying text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 group-hover:text-indigo-600">Confirmation Records</h3>
+                                <p class="text-sm text-gray-600">Manage confirmation certificates</p>
+                            </div>
+                        </a>
+
                         <a href="#" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition group">
                             <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-calendar-alt text-white text-xl"></i>
