@@ -108,6 +108,16 @@
                             </div>
                         </a>
 
+                        <a href="{{ route('secretary.wedding.index') }}" class="flex items-center p-4 bg-pink-50 hover:bg-pink-100 rounded-lg transition group">
+                            <div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 group-hover:text-pink-600">Wedding Records</h3>
+                                <p class="text-sm text-gray-600">Manage wedding certificates</p>
+                            </div>
+                        </a>
+
                         <a href="#" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition group">
                             <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-calendar-alt text-white text-xl"></i>

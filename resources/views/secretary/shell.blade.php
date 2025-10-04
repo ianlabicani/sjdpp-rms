@@ -17,14 +17,46 @@
                         <i class="fas fa-home mr-2"></i>Dashboard
                     </a>
                     <a href="{{ route('secretary.baptismal.index') }}" class="font-medium transition {{ request()->routeIs('secretary.baptismal.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
-                        <i class="fas fa-water mr-2"></i>Baptismal Records
+                        <i class="fas fa-water mr-2"></i>Baptismal
                     </a>
                     <a href="{{ route('secretary.burial.index') }}" class="font-medium transition {{ request()->routeIs('secretary.burial.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
-                        <i class="fas fa-cross mr-2"></i>Burial Records
+                        <i class="fas fa-cross mr-2"></i>Burial
                     </a>
                     <a href="{{ route('secretary.confirmation.index') }}" class="font-medium transition {{ request()->routeIs('secretary.confirmation.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
-                        <i class="fas fa-hands-praying mr-2"></i>Confirmation Records
+                        <i class="fas fa-hands-praying mr-2"></i>Confirmation
                     </a>
+                    <a href="{{ route('secretary.wedding.index') }}" class="font-medium transition {{ request()->routeIs('secretary.wedding.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <i class="fas fa-heart mr-2"></i>Wedding
+                    </a>
+
+                    <!-- Quick Create Dropdown -->
+                    <div class="relative group">
+                        <button class="font-medium text-gray-700 hover:text-blue-600 transition flex items-center">
+                            <i class="fas fa-plus-circle mr-2"></i>Quick Create
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="{{ route('secretary.baptismal.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                                    <i class="fas fa-water w-5 mr-3 text-blue-600"></i>
+                                    <span class="font-medium">New Baptismal</span>
+                                </a>
+                                <a href="{{ route('secretary.burial.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">
+                                    <i class="fas fa-cross w-5 mr-3 text-purple-600"></i>
+                                    <span class="font-medium">New Burial</span>
+                                </a>
+                                <a href="{{ route('secretary.confirmation.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
+                                    <i class="fas fa-hands-praying w-5 mr-3 text-indigo-600"></i>
+                                    <span class="font-medium">New Confirmation</span>
+                                </a>
+                                <a href="{{ route('secretary.wedding.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition">
+                                    <i class="fas fa-heart w-5 mr-3 text-pink-600"></i>
+                                    <span class="font-medium">New Wedding</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <span class="text-gray-700 font-medium">{{ auth()->user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
