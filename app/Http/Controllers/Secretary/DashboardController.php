@@ -23,7 +23,9 @@ class DashboardController extends Controller
         $scheduleStats = [
             'total' => Schedule::count(),
             'pending' => Schedule::where('status', 'pending')->count(),
-            'confirmed' => Schedule::where('status', 'confirmed')->count(),
+            'cancelled' => Schedule::where('status', 'cancelled')->count(),
+            'approved' => Schedule::where('status', 'approved')->count(),
+            'declined' => Schedule::where('status', 'declined')->count(),
             'completed' => Schedule::where('status', 'completed')->count(),
             'today' => Schedule::whereDate('schedule_date', now())->count(),
         ];

@@ -96,11 +96,13 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                    <select name="priest_status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <select name="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         <option value="">All Status</option>
-                        <option value="pending" {{ request('priest_status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="approved" {{ request('priest_status') == 'approved' ? 'selected' : '' }}>Approved</option>
-                        <option value="declined" {{ request('priest_status') == 'declined' ? 'selected' : '' }}>Declined</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                        <option value="declined" {{ request('status') == 'declined' ? 'selected' : '' }}>Declined</option>
+                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
                 </div>
                 <div>
@@ -157,8 +159,8 @@
                                     {{ $schedule->contact_number }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->priest_status_color }}-100 text-{{ $schedule->priest_status_color }}-800">
-                                        {{ ucfirst($schedule->priest_status) }}
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->status_color }}-100 text-{{ $schedule->status_color }}-800">
+                                        {{ ucfirst($schedule->status) }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">

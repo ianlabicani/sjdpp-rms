@@ -30,8 +30,8 @@
                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->sacrament_type_color }}-200 text-{{ $schedule->sacrament_type_color }}-800">
                             {{ ucfirst($schedule->sacrament_type) }}
                         </span>
-                        <span class="ml-2 px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->priest_status_color }}-100 text-{{ $schedule->priest_status_color }}-800">
-                            Priest: {{ ucfirst($schedule->priest_status) }}
+                        <span class="ml-2 px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->status_color }}-100 text-{{ $schedule->status_color }}-800">
+                            Priest: {{ ucfirst($schedule->status) }}
                         </span>
                     </div>
                 </div>
@@ -102,8 +102,8 @@
                     <div class="space-y-2">
                         <div>
                             <h4 class="text-sm font-semibold text-gray-700 mb-1">Status</h4>
-                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->priest_status_color }}-100 text-{{ $schedule->priest_status_color }}-800">
-                                {{ ucfirst($schedule->priest_status) }}
+                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->color }}-100 text-{{ $schedule->status_color }}-800">
+                                {{ ucfirst($schedule->status) }}
                             </span>
                         </div>
                         <div>
@@ -134,7 +134,7 @@
         </div>
 
         <!-- Action Buttons -->
-        @if($schedule->priest_status === 'pending')
+        @if($schedule->status === 'pending')
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Review Actions</h3>
 

@@ -55,8 +55,12 @@ class ScheduleController extends Controller
         $stats = [
             'total' => Schedule::count(),
             'pending' => Schedule::where('status', 'pending')->count(),
-            'confirmed' => Schedule::where('status', 'confirmed')->count(),
+            'cancelled' => Schedule::where('status', 'cancelled')->count(),
+            'approved' => Schedule::where('status', 'approved')->count(),
+            'declined' => Schedule::where('status', 'declined')->count(),
+            'completed' => Schedule::where('status', 'completed')->count(),
             'today' => Schedule::whereDate('schedule_date', now())->count(),
+
         ];
 
         return view('secretary.schedule.index', compact('schedules', 'stats'));
@@ -81,7 +85,7 @@ class ScheduleController extends Controller
             ->orderBy('schedule_date')
             ->orderBy('schedule_time')
             ->get()
-            ->groupBy(function($schedule) {
+            ->groupBy(function ($schedule) {
                 return $schedule->schedule_date->format('Y-m-d');
             });
 
@@ -101,7 +105,7 @@ class ScheduleController extends Controller
             'schedule_date' => 'required|date|after_or_equal:today',
             'schedule_time' => 'required',
             'notes' => 'nullable|string',
-            'status' => 'required|in:pending,confirmed,completed,cancelled',
+            'status' => 'required|in:pending,cancelled,approved,declined,completed',
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -118,6 +122,7 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $schedule->load('user');
+
         return view('secretary.schedule.show', compact('schedule'));
     }
 
@@ -142,7 +147,7 @@ class ScheduleController extends Controller
             'schedule_date' => 'required|date',
             'schedule_time' => 'required',
             'notes' => 'nullable|string',
-            'status' => 'required|in:pending,confirmed,completed,cancelled',
+            'status' => 'required|in:pending,cancelled,approved,declined,completed',
         ]);
 
         $schedule->update($validated);
@@ -167,8 +172,8 @@ class ScheduleController extends Controller
      */
     public function updateStatus(Request $request, Schedule $schedule)
     {
-        $validated = $request->validate([
-            'status' => 'required|in:pending,confirmed,completed,cancelled',
+                $validated = $request->validate([
+            'status' => 'required|in:pending,cancelled,approved,declined,completed',
         ]);
 
         $schedule->update($validated);
@@ -196,7 +201,7 @@ class ScheduleController extends Controller
             ->orderBy('schedule_date')
             ->orderBy('schedule_time')
             ->get()
-            ->groupBy(function($schedule) {
+            ->groupBy(function ($schedule) {
                 return $schedule->schedule_date->format('Y-m-d');
             });
 
@@ -204,7 +209,10 @@ class ScheduleController extends Controller
         $stats = [
             'total' => Schedule::count(),
             'pending' => Schedule::where('status', 'pending')->count(),
-            'confirmed' => Schedule::where('status', 'confirmed')->count(),
+            'cancelled' => Schedule::where('status', 'cancelled')->count(),
+            'approved' => Schedule::where('status', 'approved')->count(),
+            'declined' => Schedule::where('status', 'declined')->count(),
+            'completed' => Schedule::where('status', 'completed')->count(),
             'today' => Schedule::whereDate('schedule_date', now())->count(),
         ];
 

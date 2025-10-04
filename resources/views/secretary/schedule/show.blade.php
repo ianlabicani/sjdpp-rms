@@ -164,22 +164,22 @@
                             <form method="POST" action="{{ route('secretary.schedule.updateStatus', $schedule) }}" class="inline">
                                 @csrf
                                 @method('PATCH')
-                                <input type="hidden" name="status" value="confirmed">
+                                <input type="hidden" name="status" value="approved">
                                 <button type="submit"
-                                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition duration-150">
+                                        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow transition duration-150">
                                     <i class="fas fa-check mr-2"></i>
-                                    Confirm Schedule
+                                    Approve Schedule
                                 </button>
                             </form>
                         @endif
 
-                        @if($schedule->status == 'confirmed')
+                        @if($schedule->status == 'approved')
                             <form method="POST" action="{{ route('secretary.schedule.updateStatus', $schedule) }}" class="inline">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="status" value="completed">
                                 <button type="submit"
-                                        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow transition duration-150">
+                                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition duration-150">
                                     <i class="fas fa-check-double mr-2"></i>
                                     Mark as Completed
                                 </button>

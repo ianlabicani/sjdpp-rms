@@ -196,8 +196,8 @@
                         <div class="space-y-1 overflow-y-auto flex-1 max-h-[80px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
                             @foreach($daySchedules as $schedule)
                                 <div class="block px-2 py-1 rounded text-xs pointer-events-none
-                                          @if($schedule->priest_status == 'pending') bg-yellow-100 text-yellow-800 border-l-2 border-yellow-500
-                                          @elseif($schedule->priest_status == 'approved') bg-green-100 text-green-800 border-l-2 border-green-500
+                                          @if($schedule->status == 'pending') bg-yellow-100 text-yellow-800 border-l-2 border-yellow-500
+                                          @elseif($schedule->status == 'approved') bg-green-100 text-green-800 border-l-2 border-green-500
                                           @else bg-red-100 text-red-800 border-l-2 border-red-500
                                           @endif">
                                     <div class="font-semibold truncate">{{ date('g:i A', strtotime($schedule->schedule_time)) }}</div>
@@ -406,7 +406,7 @@
         // Display each schedule
         dateSchedules.forEach(schedule => {
             const color = getSacramentColor(schedule.sacrament_type);
-            const priestStatusColor = getPriestStatusColor(schedule.priest_status);
+            const priestStatusColor = getPriestStatusColor(schedule.status);
             const icon = getSacramentIcon(schedule.sacrament_type);
 
             const scheduleCard = document.createElement('div');
@@ -429,8 +429,8 @@
                         </p>
                         <div class="flex items-center gap-2 flex-wrap">
                             <span class="px-2 py-0.5 text-xs rounded-full bg-${priestStatusColor}-100 text-${priestStatusColor}-800 border border-${priestStatusColor}-200">
-                                <i class="fas ${schedule.priest_status === 'pending' ? 'fa-clock' : schedule.priest_status === 'approved' ? 'fa-check' : 'fa-times'} mr-1"></i>
-                                ${schedule.priest_status.charAt(0).toUpperCase() + schedule.priest_status.slice(1)}
+                                <i class="fas ${schedule.status === 'pending' ? 'fa-clock' : schedule.status === 'approved' ? 'fa-check' : 'fa-times'} mr-1"></i>
+                                ${schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
                             </span>
                             <span class="px-2 py-0.5 text-xs rounded-full bg-${color}-200 text-${color}-800">
                                 ${schedule.sacrament_type.charAt(0).toUpperCase() + schedule.sacrament_type.slice(1)}
@@ -447,17 +447,17 @@
                                     ${schedule.email}
                                 </p>
                             ` : ''}
-                            ${schedule.priest_notes && schedule.priest_status !== 'pending' ? `
+                            ${schedule.notes && schedule.status !== 'pending' ? `
                                 <p class="text-xs text-${color}-600 mt-2 pt-2 border-t border-${color}-200">
                                     <i class="fas fa-sticky-note mr-1"></i>
-                                    <strong>Your Notes:</strong> ${schedule.priest_notes}
+                                    <strong>Your Notes:</strong> ${schedule.notes}
                                 </p>
                             ` : ''}
                         </div>
                         <div class="mt-3 pt-2 border-t border-${color}-200">
                             <span class="text-xs text-${color}-700 font-medium inline-flex items-center gap-1">
                                 <i class="fas fa-eye"></i>
-                                Click to ${schedule.priest_status === 'pending' ? 'Review' : 'View Details'}
+                                Click to ${schedule.status === 'pending' ? 'Review' : 'View Details'}
                             </span>
                         </div>
                     </div>

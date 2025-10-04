@@ -25,7 +25,7 @@ class ScheduleController extends Controller
             ->whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
             ->orderBy('schedule_time')
             ->get()
-            ->groupBy(function($schedule) {
+            ->groupBy(function ($schedule) {
                 return $schedule->schedule_date->format('Y-m-d');
             });
 
@@ -33,11 +33,11 @@ class ScheduleController extends Controller
         $stats = [
             'total' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])->count(),
             'pending' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
-                ->where('priest_status', 'pending')->count(),
+                ->where('status', 'pending')->count(),
             'approved' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
-                ->where('priest_status', 'approved')->count(),
+                ->where('status', 'approved')->count(),
             'declined' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
-                ->where('priest_status', 'declined')->count(),
+                ->where('status', 'declined')->count(),
         ];
 
         return view('priest.schedule.calendar', compact('schedules', 'stats', 'currentDate'));
@@ -55,9 +55,9 @@ class ScheduleController extends Controller
             $query->where('sacrament_type', $request->sacrament_type);
         }
 
-        // Filter by priest status
-        if ($request->filled('priest_status')) {
-            $query->where('priest_status', $request->priest_status);
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
 
         // Filter by date range
@@ -70,10 +70,10 @@ class ScheduleController extends Controller
 
         // Search
         if ($request->filled('search')) {
-            $query->where(function($q) use ($request) {
-                $q->where('client_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('contact_number', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('client_name', 'like', '%'.$request->search.'%')
+                    ->orWhere('contact_number', 'like', '%'.$request->search.'%')
+                    ->orWhere('email', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -82,9 +82,11 @@ class ScheduleController extends Controller
         // Statistics
         $stats = [
             'total' => Schedule::count(),
-            'pending' => Schedule::where('priest_status', 'pending')->count(),
-            'approved' => Schedule::where('priest_status', 'approved')->count(),
-            'declined' => Schedule::where('priest_status', 'declined')->count(),
+            'pending' => Schedule::where('status', 'pending')->count(),
+            'cancelled' => Schedule::where('status', 'cancelled')->count(),
+            'approved' => Schedule::where('status', 'approved')->count(),
+            'declined' => Schedule::where('status', 'declined')->count(),
+            'completed' => Schedule::where('status', 'completed')->count(),
         ];
 
         return view('priest.schedule.index', compact('schedules', 'stats'));
@@ -96,6 +98,7 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $schedule->load('user');
+
         return view('priest.schedule.show', compact('schedule'));
     }
 
@@ -109,7 +112,7 @@ class ScheduleController extends Controller
         ]);
 
         $schedule->update([
-            'priest_status' => 'approved',
+            'status' => 'approved',
             'priest_notes' => $validated['priest_notes'] ?? null,
             'priest_reviewed_at' => now(),
         ]);
@@ -129,7 +132,7 @@ class ScheduleController extends Controller
         ]);
 
         $schedule->update([
-            'priest_status' => 'declined',
+            'status' => 'declined',
             'priest_notes' => $validated['priest_notes'],
             'priest_reviewed_at' => now(),
         ]);

@@ -24,7 +24,7 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
                     <div class="p-3 bg-gray-100 rounded-lg">
@@ -49,19 +49,30 @@
             </div>
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
-                    <div class="p-3 bg-blue-100 rounded-lg">
-                        <i class="fas fa-check-circle text-2xl text-blue-600"></i>
+                    <div class="p-3 bg-green-100 rounded-lg">
+                        <i class="fas fa-check-circle text-2xl text-green-600"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Confirmed</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ $stats['confirmed'] }}</p>
+                        <p class="text-sm text-gray-600">Approved</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $stats['approved'] }}</p>
                     </div>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
-                    <div class="p-3 bg-green-100 rounded-lg">
-                        <i class="fas fa-calendar-day text-2xl text-green-600"></i>
+                    <div class="p-3 bg-blue-100 rounded-lg">
+                        <i class="fas fa-calendar-check text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-600">Completed</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $stats['completed'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-indigo-100 rounded-lg">
+                        <i class="fas fa-calendar-day text-2xl text-indigo-600"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm text-gray-600">Today</p>
@@ -114,7 +125,8 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                             <option value="">All Statuses</option>
                             <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                            <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                            <option value="declined" {{ request('status') == 'declined' ? 'selected' : '' }}>Declined</option>
                             <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
                             <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>

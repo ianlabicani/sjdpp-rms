@@ -170,7 +170,8 @@
                                 required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                             <option value="pending" {{ old('status', $schedule->status) == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="confirmed" {{ old('status', $schedule->status) == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                            <option value="approved" {{ old('status', $schedule->status) == 'approved' ? 'selected' : '' }}>Approved</option>
+                            <option value="declined" {{ old('status', $schedule->status) == 'declined' ? 'selected' : '' }}>Declined</option>
                             <option value="completed" {{ old('status', $schedule->status) == 'completed' ? 'selected' : '' }}>Completed</option>
                             <option value="cancelled" {{ old('status', $schedule->status) == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>

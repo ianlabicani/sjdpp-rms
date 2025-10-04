@@ -15,7 +15,6 @@ class Schedule extends Model
         'schedule_time',
         'notes',
         'status',
-        'priest_status',
         'priest_notes',
         'priest_reviewed_at',
         'user_id',
@@ -33,7 +32,7 @@ class Schedule extends Model
 
     public function getSacramentTypeColorAttribute()
     {
-        return match($this->sacrament_type) {
+        return match ($this->sacrament_type) {
             'baptismal' => 'blue',
             'burial' => 'purple',
             'confirmation' => 'indigo',
@@ -44,21 +43,12 @@ class Schedule extends Model
 
     public function getStatusColorAttribute()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'yellow',
-            'confirmed' => 'blue',
-            'completed' => 'green',
-            'cancelled' => 'red',
-            default => 'gray',
-        };
-    }
-
-    public function getPriestStatusColorAttribute()
-    {
-        return match($this->priest_status) {
-            'pending' => 'yellow',
+            'cancelled' => 'gray',
             'approved' => 'green',
             'declined' => 'red',
+            'completed' => 'blue',
             default => 'gray',
         };
     }

@@ -70,14 +70,15 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
                     <div class="p-3 bg-gray-100 rounded-lg">
                         <i class="fas fa-calendar text-2xl text-gray-600"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Total Schedules</p>
+                        <p class="text-sm text-gray-600">Total</p>
                         <p class="text-2xl font-bold text-gray-900">{{ $stats['total'] }}</p>
                     </div>
                 </div>
@@ -95,19 +96,30 @@
             </div>
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
-                    <div class="p-3 bg-blue-100 rounded-lg">
-                        <i class="fas fa-check-circle text-2xl text-blue-600"></i>
+                    <div class="p-3 bg-green-100 rounded-lg">
+                        <i class="fas fa-check-circle text-2xl text-green-600"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm text-gray-600">Confirmed</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ $stats['confirmed'] }}</p>
+                        <p class="text-sm text-gray-600">Approved</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $stats['approved'] }}</p>
                     </div>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-center">
-                    <div class="p-3 bg-green-100 rounded-lg">
-                        <i class="fas fa-calendar-day text-2xl text-green-600"></i>
+                    <div class="p-3 bg-blue-100 rounded-lg">
+                        <i class="fas fa-calendar-check text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-600">Completed</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $stats['completed'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-indigo-100 rounded-lg">
+                        <i class="fas fa-calendar-day text-2xl text-indigo-600"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm text-gray-600">Today</p>
@@ -274,15 +286,19 @@
                         <span class="text-gray-600">Pending</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span class="text-gray-600">Confirmed</span>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-gray-600">Approved</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
                         <span class="text-gray-600">Completed</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <span class="text-gray-600">Declined</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-gray-500"></div>
                         <span class="text-gray-600">Cancelled</span>
                     </div>
                 </div>
@@ -364,9 +380,10 @@
     function getStatusColor(status) {
         const colors = {
             'pending': 'yellow',
-            'confirmed': 'blue',
-            'completed': 'green',
-            'cancelled': 'red'
+            'cancelled': 'gray',
+            'approved': 'green',
+            'declined': 'red',
+            'completed': 'blue'
         };
         return colors[status] || 'gray';
     }
