@@ -7,58 +7,202 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Welcome Section -->
             <div class="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg p-8 mb-8 text-white">
-                <h1 class="text-3xl font-bold mb-2">Welcome, {{ auth()->user()->name }}</h1>
-                <p class="text-blue-100">Manage administrative tasks and church records</p>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">Welcome, {{ auth()->user()->name }}</h1>
+                        <p class="text-blue-100">Manage administrative tasks and church records</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="toggleView('numbers')" id="numbersBtn" class="px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition">
+                            <i class="fas fa-list-ol mr-2"></i>Numbers
+                        </button>
+                        <button onclick="toggleView('charts')" id="chartsBtn" class="px-4 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 transition">
+                            <i class="fas fa-chart-bar mr-2"></i>Charts
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Statistics Cards -->
-            <div class="grid md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Pending Records</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">15</h3>
+            <!-- Numbers View -->
+            <div id="numbersView">
+                <!-- Main Statistics Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Baptismal Records</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $baptismalCount }}</h3>
+                                <p class="text-sm text-green-600 mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>{{ $recentStats['baptismal'] }} this month
+                                </p>
+                            </div>
+                            <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-water text-blue-600 text-2xl"></i>
+                            </div>
                         </div>
-                        <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-clock text-yellow-600 text-2xl"></i>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Burial Records</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $burialCount }}</h3>
+                                <p class="text-sm text-green-600 mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>{{ $recentStats['burial'] }} this month
+                                </p>
+                            </div>
+                            <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-cross text-purple-600 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Confirmation Records</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $confirmationCount }}</h3>
+                                <p class="text-sm text-green-600 mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>{{ $recentStats['confirmation'] }} this month
+                                </p>
+                            </div>
+                            <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-hands-praying text-indigo-600 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Wedding Records</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $weddingCount }}</h3>
+                                <p class="text-sm text-green-600 mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>{{ $recentStats['wedding'] }} this month
+                                </p>
+                            </div>
+                            <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-pink-600 text-2xl"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">New Registrations</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">7</h3>
+                <!-- Schedule Statistics -->
+                <div class="grid md:grid-cols-5 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Total Schedules</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['total'] }}</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-calendar text-gray-600 text-xl"></i>
+                            </div>
                         </div>
-                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user-plus text-green-600 text-2xl"></i>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Pending</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['pending'] }}</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Confirmed</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['confirmed'] }}</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Completed</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['completed'] }}</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-calendar-check text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium">Today</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['today'] }}</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-calendar-day text-orange-600 text-xl"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Documents Filed</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">142</h3>
+                <!-- This Year Overview -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">This Year Overview ({{ now()->year }})</h2>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <i class="fas fa-water text-4xl text-blue-600 mb-3"></i>
+                            <p class="text-sm text-gray-600 font-medium">Baptismals</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">{{ $thisYearStats['baptismal'] }}</p>
                         </div>
-                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-file-alt text-blue-600 text-2xl"></i>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-cross text-4xl text-purple-600 mb-3"></i>
+                            <p class="text-sm text-gray-600 font-medium">Burials</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">{{ $thisYearStats['burial'] }}</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg">
+                            <i class="fas fa-hands-praying text-4xl text-indigo-600 mb-3"></i>
+                            <p class="text-sm text-gray-600 font-medium">Confirmations</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">{{ $thisYearStats['confirmation'] }}</p>
+                        </div>
+                        <div class="text-center p-4 bg-pink-50 rounded-lg">
+                            <i class="fas fa-heart text-4xl text-pink-600 mb-3"></i>
+                            <p class="text-sm text-gray-600 font-medium">Weddings</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">{{ $thisYearStats['wedding'] }}</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Appointments</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">9</h3>
-                        </div>
-                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-calendar-check text-purple-600 text-2xl"></i>
-                        </div>
+            <!-- Charts View (Hidden by default) -->
+            <div id="chartsView" class="hidden">
+                <!-- Records Trend Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Records Trend (Last 6 Months)</h2>
+                    <canvas id="recordsTrendChart" height="80"></canvas>
+                </div>
+
+                <!-- Distribution Charts -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Records Distribution</h2>
+                        <canvas id="recordsDistributionChart"></canvas>
                     </div>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Schedule Status</h2>
+                        <canvas id="scheduleStatusChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- This Year Bar Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">This Year Overview ({{ now()->year }})</h2>
+                    <canvas id="thisYearChart" height="80"></canvas>
                 </div>
             </div>
 
@@ -144,53 +288,242 @@
                 <div class="bg-white rounded-xl shadow-md p-6">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Activities</h2>
                     <div class="space-y-4">
-                        <div class="flex items-start pb-4 border-b border-gray-200">
-                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <i class="fas fa-check-circle text-green-600"></i>
+                        @forelse($recentActivities as $activity)
+                            <div class="flex items-start pb-4 border-b border-gray-200 last:border-0">
+                                <div class="w-10 h-10 bg-{{ $activity['color'] }}-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas {{ $activity['icon'] }} text-{{ $activity['color'] }}-600"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-800">{{ $activity['title'] }}</p>
+                                    <p class="text-sm text-gray-600 truncate">{{ $activity['description'] }}</p>
+                                    <p class="text-xs text-gray-400 mt-1">{{ $activity['time']->diffForHumans() }}</p>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-800">Member Registration Completed</h4>
-                                <p class="text-sm text-gray-600">John Smith registered successfully</p>
-                                <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        @empty
+                            <div class="text-center py-8 text-gray-500">
+                                <i class="fas fa-inbox text-4xl mb-3"></i>
+                                <p>No recent activities</p>
                             </div>
-                        </div>
-
-                        <div class="flex items-start pb-4 border-b border-gray-200">
-                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <i class="fas fa-file-alt text-blue-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-800">Baptism Certificate Issued</h4>
-                                <p class="text-sm text-gray-600">Certificate for Maria Santos</p>
-                                <p class="text-xs text-gray-500 mt-1">5 hours ago</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start pb-4 border-b border-gray-200">
-                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <i class="fas fa-calendar-check text-purple-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-800">Appointment Scheduled</h4>
-                                <p class="text-sm text-gray-600">Wedding consultation for tomorrow</p>
-                                <p class="text-xs text-gray-500 mt-1">Yesterday</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <i class="fas fa-bell text-orange-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-800">Announcement Sent</h4>
-                                <p class="text-sm text-gray-600">Sunday mass schedule update</p>
-                                <p class="text-xs text-gray-500 mt-1">2 days ago</p>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <script>
+        // Toggle between numbers and charts view
+        function toggleView(view) {
+            const numbersView = document.getElementById('numbersView');
+            const chartsView = document.getElementById('chartsView');
+            const numbersBtn = document.getElementById('numbersBtn');
+            const chartsBtn = document.getElementById('chartsBtn');
+
+            if (view === 'numbers') {
+                numbersView.classList.remove('hidden');
+                chartsView.classList.add('hidden');
+                numbersBtn.classList.remove('bg-blue-700', 'text-white');
+                numbersBtn.classList.add('bg-white', 'text-blue-600');
+                chartsBtn.classList.remove('bg-white', 'text-blue-600');
+                chartsBtn.classList.add('bg-blue-700', 'text-white');
+            } else {
+                numbersView.classList.add('hidden');
+                chartsView.classList.remove('hidden');
+                chartsBtn.classList.remove('bg-blue-700', 'text-white');
+                chartsBtn.classList.add('bg-white', 'text-blue-600');
+                numbersBtn.classList.remove('bg-white', 'text-blue-600');
+                numbersBtn.classList.add('bg-blue-700', 'text-white');
+
+                // Initialize charts when showing charts view
+                if (!window.chartsInitialized) {
+                    initializeCharts();
+                    window.chartsInitialized = true;
+                }
+            }
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            const monthlyData = @json($monthlyData);
+
+            // Records Trend Chart
+            const trendCtx = document.getElementById('recordsTrendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: monthlyData.map(d => d.month),
+                    datasets: [
+                        {
+                            label: 'Baptismal',
+                            data: monthlyData.map(d => d.baptismal),
+                            borderColor: 'rgb(59, 130, 246)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Burial',
+                            data: monthlyData.map(d => d.burial),
+                            borderColor: 'rgb(168, 85, 247)',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Confirmation',
+                            data: monthlyData.map(d => d.confirmation),
+                            borderColor: 'rgb(99, 102, 241)',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Wedding',
+                            data: monthlyData.map(d => d.wedding),
+                            borderColor: 'rgb(236, 72, 153)',
+                            backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Records Distribution Chart (Doughnut)
+            const distributionCtx = document.getElementById('recordsDistributionChart').getContext('2d');
+            new Chart(distributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Baptismal', 'Burial', 'Confirmation', 'Wedding'],
+                    datasets: [{
+                        data: [
+                            {{ $baptismalCount }},
+                            {{ $burialCount }},
+                            {{ $confirmationCount }},
+                            {{ $weddingCount }}
+                        ],
+                        backgroundColor: [
+                            'rgb(59, 130, 246)',
+                            'rgb(168, 85, 247)',
+                            'rgb(99, 102, 241)',
+                            'rgb(236, 72, 153)'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Schedule Status Chart (Pie)
+            const scheduleStatusCtx = document.getElementById('scheduleStatusChart').getContext('2d');
+            new Chart(scheduleStatusCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Pending', 'Confirmed', 'Completed'],
+                    datasets: [{
+                        data: [
+                            {{ $scheduleStats['pending'] }},
+                            {{ $scheduleStats['confirmed'] }},
+                            {{ $scheduleStats['completed'] }}
+                        ],
+                        backgroundColor: [
+                            'rgb(234, 179, 8)',
+                            'rgb(59, 130, 246)',
+                            'rgb(34, 197, 94)'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // This Year Chart (Bar)
+            const thisYearCtx = document.getElementById('thisYearChart').getContext('2d');
+            new Chart(thisYearCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Baptismal', 'Burial', 'Confirmation', 'Wedding'],
+                    datasets: [{
+                        label: 'Records This Year',
+                        data: [
+                            {{ $thisYearStats['baptismal'] }},
+                            {{ $thisYearStats['burial'] }},
+                            {{ $thisYearStats['confirmation'] }},
+                            {{ $thisYearStats['wedding'] }}
+                        ],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(168, 85, 247, 0.8)',
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(236, 72, 153, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(59, 130, 246)',
+                            'rgb(168, 85, 247)',
+                            'rgb(99, 102, 241)',
+                            'rgb(236, 72, 153)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Set default view to numbers on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleView('numbers');
+        });
+    </script>
 
 @endsection

@@ -3,15 +3,14 @@
 use App\Http\Controllers\Secretary\BaptismalController;
 use App\Http\Controllers\Secretary\BurialController;
 use App\Http\Controllers\Secretary\ConfirmationController;
+use App\Http\Controllers\Secretary\DashboardController;
 use App\Http\Controllers\Secretary\ScheduleController;
 use App\Http\Controllers\Secretary\WeddingController;
 use Illuminate\Support\Facades\Route;
 
 // Secretary Routes
 Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('secretary.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Baptismal Records Management
     Route::resource('baptismal', BaptismalController::class);
