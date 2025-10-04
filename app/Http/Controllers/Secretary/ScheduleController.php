@@ -65,9 +65,27 @@ class ScheduleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('secretary.schedule.create');
+        // Get year and month from request or use current
+        $year = $request->get('year', now()->year);
+        $month = $request->get('month', now()->month);
+
+        // Create carbon instance for the first day of the month
+        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+
+        // Get schedules for the month
+        $schedules = Schedule::with('user')
+            ->whereYear('schedule_date', $year)
+            ->whereMonth('schedule_date', $month)
+            ->orderBy('schedule_date')
+            ->orderBy('schedule_time')
+            ->get()
+            ->groupBy(function($schedule) {
+                return $schedule->schedule_date->format('Y-m-d');
+            });
+
+        return view('secretary.schedule.create', compact('schedules', 'date'));
     }
 
     /**

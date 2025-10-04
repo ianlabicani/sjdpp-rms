@@ -2,7 +2,7 @@
 
 @section('secretary-content')
 <div class="pt-16 min-h-screen bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Header -->
         <div class="mb-6">
             <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
@@ -24,8 +24,11 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('secretary.schedule.store') }}" class="space-y-6">
-            @csrf
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Side: Form -->
+            <div class="lg:col-span-2 space-y-6">
+                <form method="POST" action="{{ route('secretary.schedule.store') }}" class="space-y-6" id="scheduleForm">
+                    @csrf
 
             <!-- Sacrament Selection -->
             <div class="bg-white rounded-lg shadow p-6">
@@ -209,6 +212,174 @@
                 </a>
             </div>
         </form>
+            </div>
+
+            <!-- Right Side: Calendar Preview -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow p-6 sticky top-20">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                            <i class="fas fa-calendar text-indigo-600 mr-2"></i>
+                            Existing Schedules
+                        </h2>
+                        <p class="text-sm text-gray-600">View schedules for this month</p>
+                    </div>
+
+                    <!-- Calendar Navigation -->
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b">
+                        <a href="{{ route('secretary.schedule.create', ['year' => $date->copy()->subMonth()->year, 'month' => $date->copy()->subMonth()->month]) }}"
+                           class="p-2 hover:bg-gray-100 rounded transition">
+                            <i class="fas fa-chevron-left text-gray-600"></i>
+                        </a>
+                        <h3 class="font-semibold text-gray-900">{{ $date->format('F Y') }}</h3>
+                        <a href="{{ route('secretary.schedule.create', ['year' => $date->copy()->addMonth()->year, 'month' => $date->copy()->addMonth()->month]) }}"
+                           class="p-2 hover:bg-gray-100 rounded transition">
+                            <i class="fas fa-chevron-right text-gray-600"></i>
+                        </a>
+                    </div>
+
+                    <!-- Mini Calendar -->
+                    <div class="mb-4">
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            <div class="text-center text-xs font-semibold text-gray-600">S</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">M</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">T</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">W</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">T</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">F</div>
+                            <div class="text-center text-xs font-semibold text-gray-600">S</div>
+                        </div>
+
+                        <div class="grid grid-cols-7 gap-1">
+                            @php
+                                $firstDayOfMonth = $date->copy()->startOfMonth();
+                                $lastDayOfMonth = $date->copy()->endOfMonth();
+                                $startDate = $firstDayOfMonth->copy()->startOfWeek(\Carbon\Carbon::SUNDAY);
+                                $endDate = $lastDayOfMonth->copy()->endOfWeek(\Carbon\Carbon::SATURDAY);
+                                $currentDate = $startDate->copy();
+                                $today = now()->format('Y-m-d');
+                            @endphp
+
+                            @while($currentDate <= $endDate)
+                                @php
+                                    $dateKey = $currentDate->format('Y-m-d');
+                                    $isCurrentMonth = $currentDate->month === $date->month;
+                                    $isToday = $dateKey === $today;
+                                    $daySchedules = $schedules->get($dateKey, collect());
+                                @endphp
+
+                                <button type="button"
+                                        onclick="showSchedulesForDate('{{ $dateKey }}', '{{ $currentDate->format('F d, Y') }}')"
+                                        class="aspect-square text-xs rounded {{ $isCurrentMonth ? 'text-gray-900' : 'text-gray-400' }} {{ $isToday ? 'bg-indigo-600 text-white font-bold' : '' }} {{ $daySchedules->count() > 0 && !$isToday ? 'bg-blue-100 font-semibold' : 'hover:bg-gray-100' }} transition relative">
+                                    {{ $currentDate->day }}
+                                    @if($daySchedules->count() > 0)
+                                        <span class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-indigo-600 rounded-full {{ $isToday ? 'bg-white' : '' }}"></span>
+                                    @endif
+                                </button>
+
+                                @php
+                                    $currentDate->addDay();
+                                @endphp
+                            @endwhile
+                        </div>
+                    </div>
+
+                    <!-- Selected Date Schedules -->
+                    <div id="dateSchedules" class="mt-4 pt-4 border-t">
+                        <p class="text-sm text-gray-500 text-center italic">Click a date to view schedules</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- JavaScript for date selection -->
+<script>
+    const schedulesData = @json($schedules);
+
+    function showSchedulesForDate(dateKey, dateLabel) {
+        const container = document.getElementById('dateSchedules');
+        const schedules = schedulesData[dateKey] || [];
+
+        if (schedules.length === 0) {
+            container.innerHTML = `
+                <div class="text-center">
+                    <p class="text-sm font-semibold text-gray-900 mb-2">${dateLabel}</p>
+                    <p class="text-sm text-gray-500 italic">No schedules for this date</p>
+                </div>
+            `;
+            // Auto-fill the date input
+            document.getElementById('schedule_date').value = dateKey;
+            return;
+        }
+
+        let html = `
+            <div>
+                <p class="text-sm font-semibold text-gray-900 mb-3">${dateLabel}</p>
+                <div class="space-y-2 max-h-64 overflow-y-auto">
+        `;
+
+        schedules.forEach(schedule => {
+            const time = new Date('2000-01-01 ' + schedule.schedule_time).toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+
+            const colors = {
+                baptismal: 'blue',
+                burial: 'purple',
+                confirmation: 'indigo',
+                wedding: 'pink'
+            };
+
+            const statusColors = {
+                pending: 'yellow',
+                confirmed: 'blue',
+                completed: 'green',
+                cancelled: 'red'
+            };
+
+            const color = colors[schedule.sacrament_type] || 'gray';
+            const statusColor = statusColors[schedule.status] || 'gray';
+
+            html += `
+                <div class="p-2 rounded bg-${color}-50 border-l-2 border-${color}-500">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-xs font-semibold text-${color}-900">${time}</span>
+                        <span class="px-1.5 py-0.5 text-xs rounded bg-${statusColor}-200 text-${statusColor}-800">${schedule.status}</span>
+                    </div>
+                    <p class="text-xs text-${color}-800 font-medium">${schedule.client_name}</p>
+                    <p class="text-xs text-${color}-600 capitalize">${schedule.sacrament_type}</p>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = html;
+
+        // Auto-fill the date input
+        document.getElementById('schedule_date').value = dateKey;
+    }
+
+    // Auto-fill date when date input changes
+    document.getElementById('schedule_date').addEventListener('change', function() {
+        const selectedDate = this.value;
+        if (selectedDate) {
+            const dateObj = new Date(selectedDate + 'T00:00:00');
+            const dateLabel = dateObj.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            showSchedulesForDate(selectedDate, dateLabel);
+        }
+    });
+</script>
+
 @endsection

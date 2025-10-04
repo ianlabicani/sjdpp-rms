@@ -1,6 +1,28 @@
 @extends('secretary.shell')
 
 @section('secretary-content')
+<style>
+    /* Custom scrollbar for calendar cells */
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 4px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 2px;
+    }
+    .scrollbar-thin:hover::-webkit-scrollbar-thumb {
+        background: #9ca3af;
+    }
+    /* Firefox scrollbar */
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db transparent;
+    }
+</style>
+
 <div class="pt-16 min-h-screen bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Header -->
@@ -122,8 +144,8 @@
                         $daySchedules = $schedules->get($dateKey, collect());
                     @endphp
 
-                    <div class="min-h-32 border-b border-r border-gray-200 p-2 {{ $isCurrentMonth ? 'bg-white' : 'bg-gray-50' }} {{ $isToday ? 'ring-2 ring-indigo-500' : '' }}">
-                        <div class="flex justify-between items-start mb-1">
+                    <div class="h-32 border-b border-r border-gray-200 p-2 {{ $isCurrentMonth ? 'bg-white' : 'bg-gray-50' }} {{ $isToday ? 'ring-2 ring-indigo-500' : '' }} flex flex-col">
+                        <div class="flex justify-between items-start mb-1 flex-shrink-0">
                             <span class="text-sm font-semibold {{ $isCurrentMonth ? 'text-gray-900' : 'text-gray-400' }} {{ $isToday ? 'bg-indigo-600 text-white rounded-full w-7 h-7 flex items-center justify-center' : '' }}">
                                 {{ $currentDate->day }}
                             </span>
@@ -134,8 +156,8 @@
                             @endif
                         </div>
 
-                        <div class="space-y-1">
-                            @foreach($daySchedules->take(3) as $schedule)
+                        <div class="space-y-1 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+                            @foreach($daySchedules as $schedule)
                                 <a href="{{ route('secretary.schedule.show', $schedule) }}"
                                    class="block text-xs p-1 rounded cursor-pointer hover:opacity-75 transition bg-{{ $schedule->sacrament_type_color }}-100 border-l-2 border-{{ $schedule->sacrament_type_color }}-500">
                                     <div class="font-semibold text-{{ $schedule->sacrament_type_color }}-900 truncate">
@@ -162,12 +184,6 @@
                                     </div>
                                 </a>
                             @endforeach
-
-                            @if($daySchedules->count() > 3)
-                                <div class="text-xs text-gray-500 text-center font-semibold">
-                                    +{{ $daySchedules->count() - 3 }} more
-                                </div>
-                            @endif
                         </div>
                     </div>
 
