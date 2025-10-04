@@ -4,9 +4,19 @@
 <div class="pt-16 min-h-screen bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Header -->
-        <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">Schedule Review</h1>
-            <p class="text-gray-600 mt-1">Review and approve/decline schedule requests</p>
+        <div class="mb-6 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Schedule Review</h1>
+                <p class="text-gray-600 mt-1">Review and approve/decline schedule requests</p>
+            </div>
+            <div class="flex gap-2">
+                <a href="{{ route('priest.schedule.calendar') }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-medium">
+                    <i class="fas fa-calendar-alt mr-2"></i>Calendar View
+                </a>
+                <a href="{{ route('priest.schedule.index') }}" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium">
+                    <i class="fas fa-list mr-2"></i>List View
+                </a>
+            </div>
         </div>
 
         <!-- Statistics Cards -->

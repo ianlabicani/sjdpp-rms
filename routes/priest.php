@@ -12,6 +12,7 @@ Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->grou
 
     // Schedule Management (Review & Approve/Decline)
     Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+    Route::get('schedule/calendar', [ScheduleController::class, 'calendar'])->name('schedule.calendar');
     Route::get('schedule/{schedule}', [ScheduleController::class, 'show'])->name('schedule.show');
     Route::patch('schedule/{schedule}/approve', [ScheduleController::class, 'approve'])->name('schedule.approve');
     Route::patch('schedule/{schedule}/decline', [ScheduleController::class, 'decline'])->name('schedule.decline');

@@ -9,6 +9,41 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     /**
+     * Display calendar view of schedules.
+     */
+    public function calendar(Request $request)
+    {
+        $month = $request->get('month', now()->month);
+        $year = $request->get('year', now()->year);
+
+        $currentDate = \Carbon\Carbon::create($year, $month, 1);
+        $startOfMonth = $currentDate->copy()->startOfMonth();
+        $endOfMonth = $currentDate->copy()->endOfMonth();
+
+        // Get all schedules for the month
+        $schedules = Schedule::with('user')
+            ->whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
+            ->orderBy('schedule_time')
+            ->get()
+            ->groupBy(function($schedule) {
+                return $schedule->schedule_date->format('Y-m-d');
+            });
+
+        // Statistics for the month
+        $stats = [
+            'total' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])->count(),
+            'pending' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
+                ->where('priest_status', 'pending')->count(),
+            'approved' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
+                ->where('priest_status', 'approved')->count(),
+            'declined' => Schedule::whereBetween('schedule_date', [$startOfMonth, $endOfMonth])
+                ->where('priest_status', 'declined')->count(),
+        ];
+
+        return view('priest.schedule.calendar', compact('schedules', 'stats', 'currentDate'));
+    }
+
+    /**
      * Display a listing of schedules for priest review.
      */
     public function index(Request $request)
