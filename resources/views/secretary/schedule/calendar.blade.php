@@ -1,5 +1,7 @@
 @extends('secretary.shell')
 
+@section('title', 'Schedule Calendar')
+
 @section('secretary-content')
 <style>
     /* Custom scrollbar for calendar cells */

@@ -1,5 +1,11 @@
 @extends('secretary.shell')
 
+@section('title', 'Secretary Dashboard')
+
+@extends('secretary.shell')
+
+@section('title', 'Dashboard')
+
 @section('secretary-content')
 
     <!-- Main Content -->

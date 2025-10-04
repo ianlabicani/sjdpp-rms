@@ -1,5 +1,7 @@
 @extends('secretary.shell')
 
+@section('title', 'Burial Records')
+
 @section('secretary-content')
 
     <!-- Main Content -->

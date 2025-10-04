@@ -1,5 +1,7 @@
 @extends('secretary.shell')
 
+@section('title', 'Wedding Record Details')
+
 @section('secretary-content')
 <div class="pt-16 min-h-screen bg-gray-50">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

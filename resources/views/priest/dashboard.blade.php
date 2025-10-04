@@ -1,5 +1,7 @@
 @extends('priest.shell')
 
+@section('title', 'Dashboard')
+
 @section('priest-content')
     <!-- Main Content -->
     <div class="pt-16 min-h-screen bg-gray-50">

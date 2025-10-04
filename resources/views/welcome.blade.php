@@ -1,5 +1,8 @@
 @extends('shell')
 
+@section('title', 'Welcome to SJDPP Church')
+
+
 @section('content')
 
     <!-- Navbar -->

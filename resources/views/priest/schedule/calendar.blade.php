@@ -1,5 +1,7 @@
 @extends('priest.shell')
 
+@section('title', 'Schedule Calendar')
+
 @section('priest-content')
 <style>
     /* Custom scrollbar for calendar cells */
