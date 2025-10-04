@@ -20,8 +20,7 @@
                     @auth
                         <a href="{{ route('dashboard') }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 px-4 py-2 font-medium transition">Login</a>
-                        <a href="{{ route('register') }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">Register</a>
+                        <a href="{{ route('login') }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">Login</a>
                     @endauth
                 </div>
             </div>

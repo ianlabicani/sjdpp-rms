@@ -82,7 +82,7 @@
                 </form>
 
                 <!-- Register Link -->
-                @if (Route::has('register'))
+                <!-- @if (Route::has('register'))
                     <div class="mt-6 text-center">
                         <p class="text-sm text-gray-600">
                             Don't have an account?
@@ -91,7 +91,7 @@
                             </a>
                         </p>
                     </div>
-                @endif
+                @endif -->
 
                 <!-- Divider -->
                 <div class="mt-6 relative">
