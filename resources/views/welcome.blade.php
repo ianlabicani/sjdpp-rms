@@ -84,6 +84,43 @@
                 <div class="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
                 <p class="text-gray-600 text-lg max-w-2xl mx-auto">Join us in our weekly services and special events. Everyone is welcome!</p>
             </div>
+
+            <!-- Mass Schedule Card -->
+            <div class="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-2xl p-8 mb-12 text-white">
+                <div class="text-center mb-8">
+                    <i class="fas fa-church text-5xl mb-4"></i>
+                    <h3 class="text-3xl font-bold mb-2">Mass Schedule</h3>
+                    <p class="text-blue-100">Join us in celebrating the Holy Eucharist</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-opacity-20 transition">
+                        <div class="text-4xl mb-3">🕊</div>
+                        <h4 class="text-xl font-bold mb-3">Sunday Mass</h4>
+                        <div class="space-y-2 text-blue-100">
+                            <p class="text-lg">7:00 AM</p>
+                            <p class="text-lg">9:00 AM</p>
+                            <p class="text-lg">5:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-opacity-20 transition">
+                        <div class="text-4xl mb-3">🕯</div>
+                        <h4 class="text-xl font-bold mb-3">Weekday Mass</h4>
+                        <div class="space-y-2 text-blue-100">
+                            <p class="text-lg">Monday - Saturday</p>
+                            <p class="text-lg font-semibold">6:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-opacity-20 transition">
+                        <div class="text-4xl mb-3">🙏</div>
+                        <h4 class="text-xl font-bold mb-3">Confession</h4>
+                        <div class="space-y-2 text-blue-100">
+                            <p class="text-lg">Saturdays</p>
+                            <p class="text-lg font-semibold">4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Sunday Worship -->
                 <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
