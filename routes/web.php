@@ -28,13 +28,6 @@ Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->grou
     })->name('dashboard');
 });
 
-// Secretary Routes
-Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('secretary.dashboard');
-    })->name('dashboard');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,3 +35,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/secretary.php';
