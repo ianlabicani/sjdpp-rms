@@ -3,8 +3,9 @@
 use App\Http\Controllers\Secretary\BaptismalController;
 use App\Http\Controllers\Secretary\BurialController;
 use App\Http\Controllers\Secretary\ConfirmationController;
-use App\Http\Controllers\Secretary\WeddingController;
 use App\Http\Controllers\Secretary\ScheduleController;
+use App\Http\Controllers\Secretary\WeddingController;
+use Illuminate\Support\Facades\Route;
 
 // Secretary Routes
 Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
