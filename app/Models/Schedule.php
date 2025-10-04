@@ -15,11 +15,15 @@ class Schedule extends Model
         'schedule_time',
         'notes',
         'status',
+        'priest_status',
+        'priest_notes',
+        'priest_reviewed_at',
         'user_id',
     ];
 
     protected $casts = [
         'schedule_date' => 'date',
+        'priest_reviewed_at' => 'datetime',
     ];
 
     public function user()
@@ -45,6 +49,16 @@ class Schedule extends Model
             'confirmed' => 'blue',
             'completed' => 'green',
             'cancelled' => 'red',
+            default => 'gray',
+        };
+    }
+
+    public function getPriestStatusColorAttribute()
+    {
+        return match($this->priest_status) {
+            'pending' => 'yellow',
+            'approved' => 'green',
+            'declined' => 'red',
             default => 'gray',
         };
     }

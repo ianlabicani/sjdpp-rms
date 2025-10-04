@@ -21,13 +21,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Priest Routes
-Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('priest.dashboard');
-    })->name('dashboard');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,3 +29,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/secretary.php';
+require __DIR__.'/priest.php';
