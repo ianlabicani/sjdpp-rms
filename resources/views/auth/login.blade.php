@@ -107,9 +107,7 @@
                 <div class="mt-6">
                     <a href="{{ url('/') }}"
                        class="w-full flex items-center justify-center gap-2 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
+                        <i class="fas fa-arrow-left"></i>
                         Back to Home
                     </a>
                 </div>

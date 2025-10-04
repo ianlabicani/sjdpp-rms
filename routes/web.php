@@ -8,8 +8,32 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    $user = auth()->user();
+
+    // Redirect based on user role
+    if ($user->hasRole('priest')) {
+        return redirect()->route('priest.dashboard');
+    } elseif ($user->hasRole('secretary')) {
+        return redirect()->route('secretary.dashboard');
+    }
+
+    // Default fallback if no specific role
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Priest Routes
+Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('priest.dashboard');
+    })->name('dashboard');
+});
+
+// Secretary Routes
+Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('secretary.dashboard');
+    })->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
