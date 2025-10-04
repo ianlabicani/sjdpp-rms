@@ -269,8 +269,9 @@
                                 @endphp
 
                                 <button type="button"
+                                        data-date="{{ $dateKey }}"
                                         onclick="showSchedulesForDate('{{ $dateKey }}', '{{ $currentDate->format('F d, Y') }}')"
-                                        class="aspect-square text-xs rounded {{ $isCurrentMonth ? 'text-gray-900' : 'text-gray-400' }} {{ $isToday ? 'bg-indigo-600 text-white font-bold' : '' }} {{ $daySchedules->count() > 0 && !$isToday ? 'bg-blue-100 font-semibold' : 'hover:bg-gray-100' }} transition relative">
+                                        class="calendar-day aspect-square text-xs rounded {{ $isCurrentMonth ? 'text-gray-900' : 'text-gray-400' }} {{ $isToday ? 'bg-indigo-600 text-white font-bold' : '' }} {{ $daySchedules->count() > 0 && !$isToday ? 'bg-blue-100 font-semibold' : 'hover:bg-gray-100' }} transition relative">
                                     {{ $currentDate->day }}
                                     @if($daySchedules->count() > 0)
                                         <span class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-indigo-600 rounded-full {{ $isToday ? 'bg-white' : '' }}"></span>
@@ -288,6 +289,29 @@
                     <div id="dateSchedules" class="mt-4 pt-4 border-t">
                         <p class="text-sm text-gray-500 text-center italic">Click a date to view schedules</p>
                     </div>
+
+                    <!-- Legend -->
+                    <div class="mt-6 pt-4 border-t">
+                        <p class="text-xs font-semibold text-gray-700 mb-2">Legend</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 bg-blue-500 rounded"></span>
+                                <span class="text-gray-600">Baptismal</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 bg-purple-500 rounded"></span>
+                                <span class="text-gray-600">Burial</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 bg-indigo-500 rounded"></span>
+                                <span class="text-gray-600">Confirmation</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 bg-pink-500 rounded"></span>
+                                <span class="text-gray-600">Wedding</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,16 +321,35 @@
 <!-- JavaScript for date selection -->
 <script>
     const schedulesData = @json($schedules);
+    const todayDate = '{{ now()->format('Y-m-d') }}';
+    const todayLabel = '{{ now()->format('F d, Y') }}';
 
     function showSchedulesForDate(dateKey, dateLabel) {
         const container = document.getElementById('dateSchedules');
         const schedules = schedulesData[dateKey] || [];
 
+        // Highlight selected date on calendar
+        document.querySelectorAll('.calendar-day').forEach(btn => {
+            btn.classList.remove('ring-2', 'ring-offset-2', 'ring-indigo-400');
+        });
+        const selectedBtn = document.querySelector(`[data-date="${dateKey}"]`);
+        if (selectedBtn && !selectedBtn.classList.contains('bg-indigo-600')) {
+            selectedBtn.classList.add('ring-2', 'ring-offset-2', 'ring-indigo-400');
+        }
+
         if (schedules.length === 0) {
             container.innerHTML = `
-                <div class="text-center">
-                    <p class="text-sm font-semibold text-gray-900 mb-2">${dateLabel}</p>
-                    <p class="text-sm text-gray-500 italic">No schedules for this date</p>
+                <div class="text-center py-4">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-900 mb-1">${dateLabel}</p>
+                    <p class="text-xs text-gray-500">No schedules for this date</p>
+                    <div class="mt-3 px-3 py-2 bg-green-50 border border-green-200 rounded-lg">
+                        <p class="text-xs text-green-700 font-semibold">
+                            <i class="fas fa-calendar-check mr-1"></i>Available for booking
+                        </p>
+                    </div>
                 </div>
             `;
             // Auto-fill the date input
@@ -314,13 +357,24 @@
             return;
         }
 
+        // Sort schedules by time
+        schedules.sort((a, b) => a.schedule_time.localeCompare(b.schedule_time));
+
         let html = `
             <div>
-                <p class="text-sm font-semibold text-gray-900 mb-3">${dateLabel}</p>
-                <div class="space-y-2 max-h-64 overflow-y-auto">
+                <div class="flex items-center justify-between mb-3 pb-3 border-b">
+                    <div>
+                        <p class="text-sm font-bold text-gray-900">${dateLabel}</p>
+                        <p class="text-xs text-gray-500">${schedules.length} schedule${schedules.length > 1 ? 's' : ''} booked</p>
+                    </div>
+                    <div class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full">
+                        ${schedules.length}
+                    </div>
+                </div>
+                <div class="space-y-2.5 max-h-96 overflow-y-auto pr-2 scrollbar-thin">
         `;
 
-        schedules.forEach(schedule => {
+        schedules.forEach((schedule, index) => {
             const time = new Date('2000-01-01 ' + schedule.schedule_time).toLocaleTimeString('en-US', {
                 hour: 'numeric',
                 minute: '2-digit',
@@ -341,22 +395,64 @@
                 cancelled: 'red'
             };
 
+            const icons = {
+                baptismal: 'fa-water',
+                burial: 'fa-cross',
+                confirmation: 'fa-hands-praying',
+                wedding: 'fa-heart'
+            };
+
             const color = colors[schedule.sacrament_type] || 'gray';
             const statusColor = statusColors[schedule.status] || 'gray';
+            const icon = icons[schedule.sacrament_type] || 'fa-calendar';
 
             html += `
-                <div class="p-2 rounded bg-${color}-50 border-l-2 border-${color}-500">
-                    <div class="flex justify-between items-start mb-1">
-                        <span class="text-xs font-semibold text-${color}-900">${time}</span>
-                        <span class="px-1.5 py-0.5 text-xs rounded bg-${statusColor}-200 text-${statusColor}-800">${schedule.status}</span>
+                <div class="p-3 rounded-lg bg-${color}-50 border border-${color}-200 hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-${color}-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas ${icon} text-white text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-${color}-900">${time}</p>
+                                <p class="text-xs text-${color}-600 capitalize">${schedule.sacrament_type}</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold rounded bg-${statusColor}-200 text-${statusColor}-800">
+                            ${schedule.status}
+                        </span>
                     </div>
-                    <p class="text-xs text-${color}-800 font-medium">${schedule.client_name}</p>
-                    <p class="text-xs text-${color}-600 capitalize">${schedule.sacrament_type}</p>
+                    <div class="pl-10">
+                        <p class="text-sm font-semibold text-${color}-900 mb-1">${schedule.client_name}</p>
+                        ${schedule.contact_number ? `
+                            <div class="flex items-center gap-1 text-xs text-${color}-700">
+                                <i class="fas fa-phone text-xs"></i>
+                                <span>${schedule.contact_number}</span>
+                            </div>
+                        ` : ''}
+                        ${schedule.email ? `
+                            <div class="flex items-center gap-1 text-xs text-${color}-700 mt-1">
+                                <i class="fas fa-envelope text-xs"></i>
+                                <span class="truncate">${schedule.email}</span>
+                            </div>
+                        ` : ''}
+                        ${schedule.notes ? `
+                            <p class="text-xs text-${color}-600 mt-2 italic line-clamp-2">
+                                <i class="fas fa-sticky-note text-xs mr-1"></i>${schedule.notes}
+                            </p>
+                        ` : ''}
+                    </div>
                 </div>
             `;
         });
 
         html += `
+                </div>
+                <div class="mt-3 pt-3 border-t">
+                    <p class="text-xs text-gray-500 text-center">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        You can still book on this date
+                    </p>
                 </div>
             </div>
         `;
@@ -380,6 +476,34 @@
             showSchedulesForDate(selectedDate, dateLabel);
         }
     });
+
+    // Automatically show today's schedules on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        showSchedulesForDate(todayDate, todayLabel);
+    });
 </script>
+
+<style>
+    /* Custom scrollbar for schedule list */
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: #f3f4f6;
+        border-radius: 3px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+    }
+    .scrollbar-thin:hover::-webkit-scrollbar-thumb {
+        background: #9ca3af;
+    }
+    /* Firefox scrollbar */
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db #f3f4f6;
+    }
+</style>
 
 @endsection

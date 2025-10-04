@@ -21,6 +21,30 @@
         scrollbar-width: thin;
         scrollbar-color: #d1d5db transparent;
     }
+
+    /* Calendar cell hover and active states */
+    .calendar-cell {
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .calendar-cell:hover {
+        background-color: #EEF2FF !important;
+        transform: scale(1.02);
+    }
+
+    .calendar-cell.selected {
+        background-color: #E0E7FF !important;
+        box-shadow: inset 0 0 0 2px #6366F1;
+    }
+
+    .calendar-cell.today {
+        box-shadow: inset 0 0 0 2px #4F46E5;
+    }
+
+    .calendar-cell.today.selected {
+        box-shadow: inset 0 0 0 3px #4F46E5;
+    }
 </style>
 
 <div class="pt-16 min-h-screen bg-gray-50">
@@ -114,7 +138,10 @@
             </div>
         </div>
 
-        <!-- Calendar -->
+        <!-- Main Content: Calendar and Side Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Calendar -->
+            <div class="lg:col-span-3">
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <div class="grid grid-cols-7 bg-gray-100 border-b border-gray-200">
                 <div class="p-3 text-center font-semibold text-gray-700">Sun</div>
@@ -144,8 +171,11 @@
                         $daySchedules = $schedules->get($dateKey, collect());
                     @endphp
 
-                    <div class="h-32 border-b border-r border-gray-200 p-2 {{ $isCurrentMonth ? 'bg-white' : 'bg-gray-50' }} {{ $isToday ? 'ring-2 ring-indigo-500' : '' }} flex flex-col">
-                        <div class="flex justify-between items-start mb-1 flex-shrink-0">
+                    <div data-date="{{ $dateKey }}"
+                         data-date-name="{{ $currentDate->format('F d, Y') }}"
+                         onclick="selectDate(this)"
+                         class="calendar-cell h-32 border-b border-r border-gray-200 p-2 {{ $isCurrentMonth ? 'bg-white' : 'bg-gray-50' }} {{ $isToday ? 'today' : '' }} flex flex-col">
+                        <div class="flex justify-between items-start mb-1 flex-shrink-0 pointer-events-none">
                             <span class="text-sm font-semibold {{ $isCurrentMonth ? 'text-gray-900' : 'text-gray-400' }} {{ $isToday ? 'bg-indigo-600 text-white rounded-full w-7 h-7 flex items-center justify-center' : '' }}">
                                 {{ $currentDate->day }}
                             </span>
@@ -156,10 +186,9 @@
                             @endif
                         </div>
 
-                        <div class="space-y-1 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+                        <div class="space-y-1 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 pointer-events-none">
                             @foreach($daySchedules as $schedule)
-                                <a href="{{ route('secretary.schedule.show', $schedule) }}"
-                                   class="block text-xs p-1 rounded cursor-pointer hover:opacity-75 transition bg-{{ $schedule->sacrament_type_color }}-100 border-l-2 border-{{ $schedule->sacrament_type_color }}-500">
+                                <div class="block text-xs p-1 rounded bg-{{ $schedule->sacrament_type_color }}-100 border-l-2 border-{{ $schedule->sacrament_type_color }}-500">
                                     <div class="font-semibold text-{{ $schedule->sacrament_type_color }}-900 truncate">
                                         {{ date('g:i A', strtotime($schedule->schedule_time)) }}
                                     </div>
@@ -182,7 +211,7 @@
                                             {{ substr($schedule->status, 0, 4) }}
                                         </span>
                                     </div>
-                                </a>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -193,9 +222,77 @@
                 @endwhile
             </div>
         </div>
+    </div>
 
-        <!-- Legend -->
-        <div class="mt-6 bg-white rounded-lg shadow p-6">
+    <!-- Side Panel for Selected Date Events -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                <i class="fas fa-calendar-day text-indigo-600 mr-2"></i>
+                Schedule Details
+            </h3>
+
+            <!-- Selected Date Display -->
+            <div id="selectedDateDisplay" class="mb-4 p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                <p class="text-sm font-medium text-indigo-900" id="selectedDateName">Today's Events</p>
+                <p class="text-xs text-indigo-600 mt-1" id="scheduleCount">Loading...</p>
+            </div>
+
+            <!-- Schedules List -->
+            <div id="schedulesContainer" class="space-y-3 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+                <div class="text-center text-gray-500 py-8">
+                    <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                    <p class="text-sm">Loading schedules...</p>
+                </div>
+            </div>
+
+            <!-- Color Legend -->
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <p class="text-xs font-semibold text-gray-700 mb-2">Sacrament Types:</p>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <span class="text-gray-600">Baptismal</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                        <span class="text-gray-600">Burial</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
+                        <span class="text-gray-600">Confirmation</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-pink-500"></div>
+                        <span class="text-gray-600">Wedding</span>
+                    </div>
+                </div>
+                <p class="text-xs font-semibold text-gray-700 mb-2 mt-3">Status:</p>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <span class="text-gray-600">Pending</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <span class="text-gray-600">Confirmed</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-gray-600">Completed</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <span class="text-gray-600">Cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Original Legend (Hidden on Large Screens) -->
+        <div class="mt-6 bg-white rounded-lg shadow p-6 lg:hidden">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Legend</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="flex items-center gap-2">
@@ -236,4 +333,182 @@
         </div>
     </div>
 </div>
+
+<script>
+    // All schedules data from backend
+    const allSchedules = @json($schedules);
+
+    // Function to get sacrament icon
+    function getSacramentIcon(type) {
+        const icons = {
+            'baptismal': 'fa-water',
+            'burial': 'fa-cross',
+            'confirmation': 'fa-hands-praying',
+            'wedding': 'fa-heart'
+        };
+        return icons[type] || 'fa-calendar';
+    }
+
+    // Function to get sacrament color
+    function getSacramentColor(type) {
+        const colors = {
+            'baptismal': 'blue',
+            'burial': 'purple',
+            'confirmation': 'indigo',
+            'wedding': 'pink'
+        };
+        return colors[type] || 'gray';
+    }
+
+    // Function to get status color
+    function getStatusColor(status) {
+        const colors = {
+            'pending': 'yellow',
+            'confirmed': 'blue',
+            'completed': 'green',
+            'cancelled': 'red'
+        };
+        return colors[status] || 'gray';
+    }
+
+    // Function to format time
+    function formatTime(timeString) {
+        const [hours, minutes] = timeString.split(':');
+        const hour = parseInt(hours);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+        return `${displayHour}:${minutes} ${ampm}`;
+    }
+
+    // Function to show schedules for a specific date
+    function showSchedulesForDate(dateKey, dateName) {
+        const selectedDateName = document.getElementById('selectedDateName');
+        const scheduleCount = document.getElementById('scheduleCount');
+        const schedulesContainer = document.getElementById('schedulesContainer');
+
+        // Update selected date display
+        selectedDateName.textContent = dateName;
+
+        // Get schedules for this date
+        const dateSchedules = allSchedules[dateKey] || [];
+
+        // Update count
+        scheduleCount.textContent = dateSchedules.length === 0
+            ? 'No schedules'
+            : `${dateSchedules.length} schedule${dateSchedules.length > 1 ? 's' : ''}`;
+
+        // Clear container
+        schedulesContainer.innerHTML = '';
+
+        if (dateSchedules.length === 0) {
+            schedulesContainer.innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <i class="fas fa-calendar-check text-4xl mb-3 text-gray-300"></i>
+                    <p class="text-sm font-medium">No schedules for this date</p>
+                    <p class="text-xs mt-1">This date is available for booking</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Display each schedule
+        dateSchedules.forEach(schedule => {
+            const color = getSacramentColor(schedule.sacrament_type);
+            const statusColor = getStatusColor(schedule.status);
+            const icon = getSacramentIcon(schedule.sacrament_type);
+
+            const scheduleCard = document.createElement('div');
+            scheduleCard.className = `bg-${color}-50 border border-${color}-200 rounded-lg p-4 hover:shadow-md transition cursor-pointer`;
+            scheduleCard.onclick = function() {
+                window.location.href = `/secretary/schedule/${schedule.id}`;
+            };
+            scheduleCard.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-${color}-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas ${icon} text-white"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1">
+                            <h4 class="font-semibold text-${color}-900 text-sm truncate">${schedule.client_name}</h4>
+                            <span class="px-2 py-0.5 text-xs rounded-full bg-${statusColor}-100 text-${statusColor}-800 border border-${statusColor}-200 flex-shrink-0">
+                                ${schedule.status}
+                            </span>
+                        </div>
+                        <p class="text-xs text-${color}-700 mb-2">
+                            <i class="fas fa-clock mr-1"></i>
+                            ${formatTime(schedule.schedule_time)}
+                        </p>
+                        <div class="space-y-1">
+                            <p class="text-xs text-${color}-600">
+                                <i class="fas fa-phone mr-1"></i>
+                                ${schedule.contact_number}
+                            </p>
+                            ${schedule.email ? `
+                                <p class="text-xs text-${color}-600 truncate">
+                                    <i class="fas fa-envelope mr-1"></i>
+                                    ${schedule.email}
+                                </p>
+                            ` : ''}
+                            ${schedule.notes ? `
+                                <p class="text-xs text-${color}-600 mt-2 pt-2 border-t border-${color}-200">
+                                    <i class="fas fa-sticky-note mr-1"></i>
+                                    ${schedule.notes}
+                                </p>
+                            ` : ''}
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-${color}-200">
+                            <span class="text-xs text-${color}-700 font-medium inline-flex items-center gap-1">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            schedulesContainer.appendChild(scheduleCard);
+        });
+    }
+
+    // Function to select a date cell
+    function selectDate(cellElement) {
+        // Remove selected class from all cells
+        document.querySelectorAll('.calendar-cell').forEach(cell => {
+            cell.classList.remove('selected');
+        });
+
+        // Add selected class to clicked cell
+        cellElement.classList.add('selected');
+
+        // Get date info from data attributes
+        const dateKey = cellElement.getAttribute('data-date');
+        const dateName = cellElement.getAttribute('data-date-name');
+
+        // Show schedules for this date
+        showSchedulesForDate(dateKey, dateName);
+    }
+
+    // Auto-load today's events on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const todayKey = `${year}-${month}-${day}`;
+
+        const todayFormatted = today.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Find and select today's cell
+        const todayCell = document.querySelector(`.calendar-cell[data-date="${todayKey}"]`);
+        if (todayCell) {
+            todayCell.classList.add('selected');
+        }
+
+        showSchedulesForDate(todayKey, todayFormatted);
+    });
+</script>
+
 @endsection
