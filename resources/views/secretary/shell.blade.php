@@ -28,6 +28,9 @@
                     <a href="{{ route('secretary.wedding.index') }}" class="font-medium transition {{ request()->routeIs('secretary.wedding.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
                         <i class="fas fa-heart mr-2"></i>Wedding
                     </a>
+                    <a href="{{ route('secretary.schedule.index') }}" class="font-medium transition {{ request()->routeIs('secretary.schedule.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <i class="fas fa-calendar-alt mr-2"></i>Schedule
+                    </a>
 
                     <!-- Quick Create Dropdown -->
                     <div class="relative group">

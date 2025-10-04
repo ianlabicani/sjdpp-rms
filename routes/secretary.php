@@ -4,6 +4,7 @@ use App\Http\Controllers\Secretary\BaptismalController;
 use App\Http\Controllers\Secretary\BurialController;
 use App\Http\Controllers\Secretary\ConfirmationController;
 use App\Http\Controllers\Secretary\WeddingController;
+use App\Http\Controllers\Secretary\ScheduleController;
 
 // Secretary Routes
 Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
@@ -22,4 +23,9 @@ Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')
 
     // Wedding Records Management
     Route::resource('wedding', WeddingController::class);
+
+    // Schedule Management
+    Route::get('schedule/calendar', [ScheduleController::class, 'calendar'])->name('schedule.calendar');
+    Route::resource('schedule', ScheduleController::class);
+    Route::patch('schedule/{schedule}/status', [ScheduleController::class, 'updateStatus'])->name('schedule.updateStatus');
 });

@@ -118,7 +118,7 @@
                             </div>
                         </a>
 
-                        <a href="#" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition group">
+                        <a href="{{ route('secretary.schedule.create') }}" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition group">
                             <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-calendar-alt text-white text-xl"></i>
                             </div>
