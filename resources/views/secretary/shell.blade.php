@@ -19,6 +19,9 @@
                     <a href="{{ route('secretary.baptismal.index') }}" class="font-medium transition {{ request()->routeIs('secretary.baptismal.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
                         <i class="fas fa-water mr-2"></i>Baptismal Records
                     </a>
+                    <a href="{{ route('secretary.burial.index') }}" class="font-medium transition {{ request()->routeIs('secretary.burial.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <i class="fas fa-cross mr-2"></i>Burial Records
+                    </a>
                     <span class="text-gray-700 font-medium">{{ auth()->user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

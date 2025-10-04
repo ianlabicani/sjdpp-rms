@@ -88,18 +88,28 @@
                             </div>
                         </a>
 
-                        <a href="#" class="flex items-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition group">
+                        <a href="{{ route('secretary.burial.index') }}" class="flex items-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition group">
                             <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-calendar-alt text-white text-xl"></i>
+                                <i class="fas fa-cross text-white text-xl"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 group-hover:text-purple-600">Schedule Appointment</h3>
-                                <p class="text-sm text-gray-600">Book appointments</p>
+                                <h3 class="font-semibold text-gray-800 group-hover:text-purple-600">Burial Records</h3>
+                                <p class="text-sm text-gray-600">Manage burial certificates</p>
                             </div>
                         </a>
 
                         <a href="#" class="flex items-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition group">
                             <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-calendar-alt text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 group-hover:text-orange-600">Schedule Appointment</h3>
+                                <p class="text-sm text-gray-600">Book appointments</p>
+                            </div>
+                        </a>
+
+                        <a href="#" class="flex items-center p-4 bg-red-50 hover:bg-red-100 rounded-lg transition group">
+                            <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-bullhorn text-white text-xl"></i>
                             </div>
                             <div class="flex-1">

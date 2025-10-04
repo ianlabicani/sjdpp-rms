@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Secretary\BaptismalController;
+use App\Http\Controllers\Secretary\BurialController;
 
 // Secretary Routes
 Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
@@ -10,4 +11,7 @@ Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')
 
     // Baptismal Records Management
     Route::resource('baptismal', BaptismalController::class);
+
+    // Burial Records Management
+    Route::resource('burial', BurialController::class);
 });
