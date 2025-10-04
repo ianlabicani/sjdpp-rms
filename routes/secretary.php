@@ -13,6 +13,7 @@ Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Baptismal Records Management
+    Route::get('baptismal/{baptismal}/certificate', [BaptismalController::class, 'certificate'])->name('baptismal.certificate');
     Route::resource('baptismal', BaptismalController::class);
 
     // Burial Records Management

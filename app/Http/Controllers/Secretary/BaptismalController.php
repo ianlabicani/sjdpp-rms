@@ -130,5 +130,10 @@ class BaptismalController extends Controller
         return redirect()->route('secretary.baptismal.index')
             ->with('success', 'Baptismal record deleted successfully.');
     }
+
+    public function certificate(Baptismal $baptismal)
+    {
+        return view('secretary.baptismal.certificate', compact('baptismal'));
+    }
 }
 

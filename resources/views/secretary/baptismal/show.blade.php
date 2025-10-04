@@ -12,8 +12,11 @@
                 </a>
                 <div class="flex gap-3">
                     <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
-                        <i class="fas fa-print mr-2"></i>Print Certificate
+                        <i class="fas fa-print mr-2"></i>Print Simple
                     </button>
+                    <a href="{{ route('secretary.baptismal.certificate', $baptismal) }}" target="_blank" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition font-medium">
+                        <i class="fas fa-file-pdf mr-2"></i>Official Certificate
+                    </a>
                     <a href="{{ route('secretary.baptismal.edit', $baptismal) }}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-medium">
                         <i class="fas fa-edit mr-2"></i>Edit
                     </a>
