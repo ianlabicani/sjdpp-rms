@@ -35,42 +35,46 @@
                 </h2>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer hover:border-blue-500 transition {{ old('sacrament_type') == 'baptismal' ? 'border-blue-500 bg-blue-50' : 'border-gray-300' }}">
+                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition {{ old('sacrament_type') == 'baptismal' ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-300 hover:border-blue-500' }}">
                         <input type="radio"
                                name="sacrament_type"
                                value="baptismal"
                                {{ old('sacrament_type') == 'baptismal' ? 'checked' : '' }}
-                               class="sr-only peer">
+                               class="sr-only peer"
+                               onchange="this.closest('div.grid').querySelectorAll('label').forEach(l => l.classList.remove('border-blue-500', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'border-purple-500', 'bg-purple-50', 'ring-purple-200', 'border-indigo-500', 'bg-indigo-50', 'ring-indigo-200', 'border-pink-500', 'bg-pink-50', 'ring-pink-200')); this.parentElement.classList.add('border-blue-500', 'bg-blue-50', 'ring-2', 'ring-blue-200');">
                         <i class="fas fa-water text-3xl text-blue-600 mb-2"></i>
                         <span class="text-sm font-medium text-gray-900">Baptismal</span>
                     </label>
 
-                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer hover:border-purple-500 transition {{ old('sacrament_type') == 'burial' ? 'border-purple-500 bg-purple-50' : 'border-gray-300' }}">
+                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition {{ old('sacrament_type') == 'burial' ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200' : 'border-gray-300 hover:border-purple-500' }}">
                         <input type="radio"
                                name="sacrament_type"
                                value="burial"
                                {{ old('sacrament_type') == 'burial' ? 'checked' : '' }}
-                               class="sr-only peer">
+                               class="sr-only peer"
+                               onchange="this.closest('div.grid').querySelectorAll('label').forEach(l => l.classList.remove('border-blue-500', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'border-purple-500', 'bg-purple-50', 'ring-purple-200', 'border-indigo-500', 'bg-indigo-50', 'ring-indigo-200', 'border-pink-500', 'bg-pink-50', 'ring-pink-200')); this.parentElement.classList.add('border-purple-500', 'bg-purple-50', 'ring-2', 'ring-purple-200');">
                         <i class="fas fa-cross text-3xl text-purple-600 mb-2"></i>
                         <span class="text-sm font-medium text-gray-900">Burial</span>
                     </label>
 
-                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer hover:border-indigo-500 transition {{ old('sacrament_type') == 'confirmation' ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300' }}">
+                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition {{ old('sacrament_type') == 'confirmation' ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200' : 'border-gray-300 hover:border-indigo-500' }}">
                         <input type="radio"
                                name="sacrament_type"
                                value="confirmation"
                                {{ old('sacrament_type') == 'confirmation' ? 'checked' : '' }}
-                               class="sr-only peer">
+                               class="sr-only peer"
+                               onchange="this.closest('div.grid').querySelectorAll('label').forEach(l => l.classList.remove('border-blue-500', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'border-purple-500', 'bg-purple-50', 'ring-purple-200', 'border-indigo-500', 'bg-indigo-50', 'ring-indigo-200', 'border-pink-500', 'bg-pink-50', 'ring-pink-200')); this.parentElement.classList.add('border-indigo-500', 'bg-indigo-50', 'ring-2', 'ring-indigo-200');">
                         <i class="fas fa-hands-praying text-3xl text-indigo-600 mb-2"></i>
                         <span class="text-sm font-medium text-gray-900">Confirmation</span>
                     </label>
 
-                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer hover:border-pink-500 transition {{ old('sacrament_type') == 'wedding' ? 'border-pink-500 bg-pink-50' : 'border-gray-300' }}">
+                    <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition {{ old('sacrament_type') == 'wedding' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-300 hover:border-pink-500' }}">
                         <input type="radio"
                                name="sacrament_type"
                                value="wedding"
                                {{ old('sacrament_type') == 'wedding' ? 'checked' : '' }}
-                               class="sr-only peer">
+                               class="sr-only peer"
+                               onchange="this.closest('div.grid').querySelectorAll('label').forEach(l => l.classList.remove('border-blue-500', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'border-purple-500', 'bg-purple-50', 'ring-purple-200', 'border-indigo-500', 'bg-indigo-50', 'ring-indigo-200', 'border-pink-500', 'bg-pink-50', 'ring-pink-200')); this.parentElement.classList.add('border-pink-500', 'bg-pink-50', 'ring-2', 'ring-pink-200');">
                         <i class="fas fa-heart text-3xl text-pink-600 mb-2"></i>
                         <span class="text-sm font-medium text-gray-900">Wedding</span>
                     </label>

@@ -56,6 +56,11 @@
                                     <i class="fas fa-heart w-5 mr-3 text-pink-600"></i>
                                     <span class="font-medium">New Wedding</span>
                                 </a>
+                                <div class="border-t border-gray-200 my-2"></div>
+                                <a href="{{ route('secretary.schedule.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition">
+                                    <i class="fas fa-calendar-plus w-5 mr-3 text-orange-600"></i>
+                                    <span class="font-medium">New Schedule</span>
+                                </a>
                             </div>
                         </div>
                     </div>
