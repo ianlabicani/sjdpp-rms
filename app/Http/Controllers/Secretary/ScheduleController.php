@@ -97,8 +97,9 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'sacrament_type' => 'required|in:baptismal,burial,confirmation,wedding',
+        // Base validation rules
+        $rules = [
+            'sacrament_type' => 'required|in:baptismal,burial,confirmation,wedding,blessing,parish_mass,barrio_mass,school_mass',
             'client_name' => 'required|string|max:255',
             'contact_number' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -106,8 +107,65 @@ class ScheduleController extends Controller
             'schedule_time' => 'required',
             'notes' => 'nullable|string',
             'status' => 'required|in:pending,cancelled,approved,declined,completed',
-        ]);
+            // Common fields
+            'presider_name' => 'nullable|string|max:255',
+            'location_text' => 'nullable|string',
+            'expected_attendees' => 'nullable|integer|min:0',
+            'sound_system_needed' => 'nullable|boolean',
+            'stipend_amount' => 'nullable|numeric|min:0',
+        ];
 
+        // Add conditional validation based on sacrament type
+        if ($request->sacrament_type === 'blessing') {
+            $rules = array_merge($rules, [
+                'blessing_type' => 'required|in:house,store,office,vehicle,image,other',
+                'owner_name' => 'required|string|max:255',
+                'address' => 'required|string',
+                'barangay_name' => 'nullable|string|max:255',
+                'occupants_count' => 'nullable|integer|min:0',
+                'items_prepared' => 'nullable|string',
+                'access_notes' => 'nullable|string',
+            ]);
+        }
+
+        if (in_array($request->sacrament_type, ['parish_mass', 'barrio_mass', 'school_mass'])) {
+            $rules = array_merge($rules, [
+                'mass_category' => 'required_if:sacrament_type,parish_mass,barrio_mass,school_mass|nullable|in:sunday,weekday,holy_day,special_occasion,memorial,other',
+                'intention_summary' => 'nullable|string',
+                'ministers_needed' => 'nullable|boolean',
+                'choir_team' => 'nullable|string|max:255',
+                'recurrence' => 'nullable|in:none,weekly,monthly',
+            ]);
+        }
+
+        if ($request->sacrament_type === 'parish_mass') {
+            $rules['chapel_name'] = 'nullable|string|max:255';
+        }
+
+        if ($request->sacrament_type === 'barrio_mass') {
+            $rules = array_merge($rules, [
+                'barangay_name' => 'required|string|max:255',
+                'sitio_name' => 'nullable|string|max:255',
+                'chapel_name' => 'nullable|string|max:255',
+                'barrio_coordinator' => 'nullable|string|max:255',
+                'barrio_coordinator_phone' => 'nullable|string|max:255',
+                'generator_needed' => 'nullable|boolean',
+                'transport_needed' => 'nullable|boolean',
+            ]);
+        }
+
+        if ($request->sacrament_type === 'school_mass') {
+            $rules = array_merge($rules, [
+                'school_name' => 'required|string|max:255',
+                'campus_or_venue' => 'nullable|string|max:255',
+                'grade_levels' => 'nullable|string|max:255',
+                'expected_students' => 'nullable|integer|min:0',
+                'expected_faculty' => 'nullable|integer|min:0',
+                'assembly_time' => 'nullable|date_format:H:i',
+            ]);
+        }
+
+        $validated = $request->validate($rules);
         $validated['user_id'] = auth()->id();
 
         Schedule::create($validated);
@@ -139,8 +197,9 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        $validated = $request->validate([
-            'sacrament_type' => 'required|in:baptismal,burial,confirmation,wedding',
+        // Base validation rules
+        $rules = [
+            'sacrament_type' => 'required|in:baptismal,burial,confirmation,wedding,blessing,parish_mass,barrio_mass,school_mass',
             'client_name' => 'required|string|max:255',
             'contact_number' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -148,7 +207,65 @@ class ScheduleController extends Controller
             'schedule_time' => 'required',
             'notes' => 'nullable|string',
             'status' => 'required|in:pending,cancelled,approved,declined,completed',
-        ]);
+            // Common fields
+            'presider_name' => 'nullable|string|max:255',
+            'location_text' => 'nullable|string',
+            'expected_attendees' => 'nullable|integer|min:0',
+            'sound_system_needed' => 'nullable|boolean',
+            'stipend_amount' => 'nullable|numeric|min:0',
+        ];
+
+        // Add conditional validation based on sacrament type
+        if ($request->sacrament_type === 'blessing') {
+            $rules = array_merge($rules, [
+                'blessing_type' => 'required|in:house,store,office,vehicle,image,other',
+                'owner_name' => 'required|string|max:255',
+                'address' => 'required|string',
+                'barangay_name' => 'nullable|string|max:255',
+                'occupants_count' => 'nullable|integer|min:0',
+                'items_prepared' => 'nullable|string',
+                'access_notes' => 'nullable|string',
+            ]);
+        }
+
+        if (in_array($request->sacrament_type, ['parish_mass', 'barrio_mass', 'school_mass'])) {
+            $rules = array_merge($rules, [
+                'mass_category' => 'required_if:sacrament_type,parish_mass,barrio_mass,school_mass|nullable|in:sunday,weekday,holy_day,special_occasion,memorial,other',
+                'intention_summary' => 'nullable|string',
+                'ministers_needed' => 'nullable|boolean',
+                'choir_team' => 'nullable|string|max:255',
+                'recurrence' => 'nullable|in:none,weekly,monthly',
+            ]);
+        }
+
+        if ($request->sacrament_type === 'parish_mass') {
+            $rules['chapel_name'] = 'nullable|string|max:255';
+        }
+
+        if ($request->sacrament_type === 'barrio_mass') {
+            $rules = array_merge($rules, [
+                'barangay_name' => 'required|string|max:255',
+                'sitio_name' => 'nullable|string|max:255',
+                'chapel_name' => 'nullable|string|max:255',
+                'barrio_coordinator' => 'nullable|string|max:255',
+                'barrio_coordinator_phone' => 'nullable|string|max:255',
+                'generator_needed' => 'nullable|boolean',
+                'transport_needed' => 'nullable|boolean',
+            ]);
+        }
+
+        if ($request->sacrament_type === 'school_mass') {
+            $rules = array_merge($rules, [
+                'school_name' => 'required|string|max:255',
+                'campus_or_venue' => 'nullable|string|max:255',
+                'grade_levels' => 'nullable|string|max:255',
+                'expected_students' => 'nullable|integer|min:0',
+                'expected_faculty' => 'nullable|integer|min:0',
+                'assembly_time' => 'nullable|date_format:H:i',
+            ]);
+        }
+
+        $validated = $request->validate($rules);
 
         $schedule->update($validated);
 

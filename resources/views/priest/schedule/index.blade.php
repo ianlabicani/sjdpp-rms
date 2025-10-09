@@ -94,6 +94,10 @@
                         <option value="burial" {{ request('sacrament_type') == 'burial' ? 'selected' : '' }}>Burial</option>
                         <option value="confirmation" {{ request('sacrament_type') == 'confirmation' ? 'selected' : '' }}>Confirmation</option>
                         <option value="wedding" {{ request('sacrament_type') == 'wedding' ? 'selected' : '' }}>Wedding</option>
+                        <option value="blessing" {{ request('sacrament_type') == 'blessing' ? 'selected' : '' }}>Blessing</option>
+                        <option value="parish_mass" {{ request('sacrament_type') == 'parish_mass' ? 'selected' : '' }}>Parish Mass</option>
+                        <option value="barrio_mass" {{ request('sacrament_type') == 'barrio_mass' ? 'selected' : '' }}>Barrio Mass</option>
+                        <option value="school_mass" {{ request('sacrament_type') == 'school_mass' ? 'selected' : '' }}>School Mass</option>
                     </select>
                 </div>
                 <div>

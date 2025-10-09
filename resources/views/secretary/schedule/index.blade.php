@@ -107,15 +107,19 @@
 
                     <!-- Sacrament Type -->
                     <div>
-                        <label for="sacrament_type" class="block text-sm font-medium text-gray-700 mb-1">Sacrament</label>
+                        <label for="sacrament_type" class="block text-sm font-medium text-gray-700 mb-1">Schedule Type</label>
                         <select name="sacrament_type"
                                 id="sacrament_type"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                            <option value="">All Sacraments</option>
+                            <option value="">All Types</option>
                             <option value="baptismal" {{ request('sacrament_type') == 'baptismal' ? 'selected' : '' }}>Baptismal</option>
                             <option value="burial" {{ request('sacrament_type') == 'burial' ? 'selected' : '' }}>Burial</option>
                             <option value="confirmation" {{ request('sacrament_type') == 'confirmation' ? 'selected' : '' }}>Confirmation</option>
                             <option value="wedding" {{ request('sacrament_type') == 'wedding' ? 'selected' : '' }}>Wedding</option>
+                            <option value="blessing" {{ request('sacrament_type') == 'blessing' ? 'selected' : '' }}>Blessing</option>
+                            <option value="parish_mass" {{ request('sacrament_type') == 'parish_mass' ? 'selected' : '' }}>Parish Mass</option>
+                            <option value="barrio_mass" {{ request('sacrament_type') == 'barrio_mass' ? 'selected' : '' }}>Barrio Mass</option>
+                            <option value="school_mass" {{ request('sacrament_type') == 'school_mass' ? 'selected' : '' }}>School Mass</option>
                         </select>
                     </div>
 

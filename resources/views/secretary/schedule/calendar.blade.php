@@ -217,8 +217,18 @@
                                                 <i class="fas fa-cross"></i>
                                             @elseif($schedule->sacrament_type == 'confirmation')
                                                 <i class="fas fa-hands-praying"></i>
-                                            @else
+                                            @elseif($schedule->sacrament_type == 'wedding')
                                                 <i class="fas fa-heart"></i>
+                                            @elseif($schedule->sacrament_type == 'blessing')
+                                                <i class="fas fa-hand-holding-heart"></i>
+                                            @elseif($schedule->sacrament_type == 'parish_mass')
+                                                <i class="fas fa-church"></i>
+                                            @elseif($schedule->sacrament_type == 'barrio_mass')
+                                                <i class="fas fa-people-roof"></i>
+                                            @elseif($schedule->sacrament_type == 'school_mass')
+                                                <i class="fas fa-school"></i>
+                                            @else
+                                                <i class="fas fa-calendar"></i>
                                             @endif
                                         </span>
                                         <span class="px-1 py-0.5 text-xs rounded bg-{{ $schedule->status_color }}-200 text-{{ $schedule->status_color }}-800">
@@ -362,7 +372,11 @@
             'baptismal': 'fa-water',
             'burial': 'fa-cross',
             'confirmation': 'fa-hands-praying',
-            'wedding': 'fa-heart'
+            'wedding': 'fa-heart',
+            'blessing': 'fa-hand-holding-heart',
+            'parish_mass': 'fa-church',
+            'barrio_mass': 'fa-people-roof',
+            'school_mass': 'fa-school'
         };
         return icons[type] || 'fa-calendar';
     }
@@ -373,7 +387,11 @@
             'baptismal': 'blue',
             'burial': 'purple',
             'confirmation': 'indigo',
-            'wedding': 'pink'
+            'wedding': 'pink',
+            'blessing': 'teal',
+            'parish_mass': 'cyan',
+            'barrio_mass': 'emerald',
+            'school_mass': 'amber'
         };
         return colors[type] || 'gray';
     }

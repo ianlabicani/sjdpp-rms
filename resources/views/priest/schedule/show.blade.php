@@ -1,6 +1,33 @@
 @extends('priest.shell')
 
-@section('title', 'Schedule Details')
+@            <!-- Header with Sacrament Type -->
+            <div class="bg-{{ $schedule->sacrament_type_color }}-100 border-l-4 border-{{ $schedule->sacrament_type_color }}-500 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->sacrament_type_color }}-200 text-{{ $schedule->sacrament_type_color }}-800">
+                            @if($schedule->sacrament_type == 'baptismal')
+                                <i class="fas fa-water mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'burial')
+                                <i class="fas fa-cross mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'confirmation')
+                                <i class="fas fa-hands-praying mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'wedding')
+                                <i class="fas fa-heart mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'blessing')
+                                <i class="fas fa-hand-holding-heart mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'parish_mass')
+                                <i class="fas fa-church mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'barrio_mass')
+                                <i class="fas fa-people-roof mr-2"></i>
+                            @elseif($schedule->sacrament_type == 'school_mass')
+                                <i class="fas fa-school mr-2"></i>
+                            @endif
+                            {{ ucfirst(str_replace('_', ' ', $schedule->sacrament_type)) }}
+                        </span>
+                        <span class="ml-2 px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->status_color }}-100 text-{{ $schedule->status_color }}-800">
+                            Priest: {{ ucfirst($schedule->status) }}
+                        </span>
+                    </div>tle', 'Schedule Details')
 
 @section('priest-content')
 <div class="pt-16 min-h-screen bg-gray-50">
@@ -84,6 +111,111 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Blessing Specific Information -->
+            @if($schedule->sacrament_type == 'blessing')
+                <div class="border-t border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                        <i class="fas fa-hand-holding-heart text-teal-600 mr-2"></i>Blessing Details
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                        @if($schedule->blessing_type)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Blessing Type</h4>
+                                <p class="text-gray-900">{{ ucfirst(str_replace('_', ' ', $schedule->blessing_type)) }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->owner_name)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Owner Name</h4>
+                                <p class="text-gray-900">{{ $schedule->owner_name }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->address)
+                            <div class="md:col-span-2">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Address</h4>
+                                <p class="text-gray-900">{{ $schedule->address }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->barangay_name)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Barangay</h4>
+                                <p class="text-gray-900">{{ $schedule->barangay_name }}</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
+            <!-- Mass Specific Information -->
+            @if(in_array($schedule->sacrament_type, ['parish_mass', 'barrio_mass', 'school_mass']))
+                <div class="border-t border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                        @if($schedule->sacrament_type == 'parish_mass')
+                            <i class="fas fa-church text-cyan-600 mr-2"></i>Parish Mass Details
+                        @elseif($schedule->sacrament_type == 'barrio_mass')
+                            <i class="fas fa-people-roof text-emerald-600 mr-2"></i>Barrio Mass Details
+                        @else
+                            <i class="fas fa-school text-amber-600 mr-2"></i>School Mass Details
+                        @endif
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                        @if($schedule->mass_category)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Mass Category</h4>
+                                <p class="text-gray-900">{{ ucfirst(str_replace('_', ' ', $schedule->mass_category)) }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->sacrament_type == 'barrio_mass' && $schedule->barangay_name)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Barangay</h4>
+                                <p class="text-gray-900">{{ $schedule->barangay_name }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->sacrament_type == 'school_mass' && $schedule->school_name)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">School</h4>
+                                <p class="text-gray-900">{{ $schedule->school_name }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->intention_summary)
+                            <div class="md:col-span-2">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Mass Intention</h4>
+                                <p class="text-gray-900">{{ $schedule->intention_summary }}</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
+            <!-- Common Additional Information for New Types -->
+            @if(in_array($schedule->sacrament_type, ['blessing', 'parish_mass', 'barrio_mass', 'school_mass']))
+                <div class="border-t border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                        <i class="fas fa-circle-info text-indigo-600 mr-2"></i>Additional Information
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                        @if($schedule->presider_name)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Presiding Priest</h4>
+                                <p class="text-gray-900">{{ $schedule->presider_name }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->expected_attendees)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Expected Attendees</h4>
+                                <p class="text-gray-900">{{ number_format($schedule->expected_attendees) }}</p>
+                            </div>
+                        @endif
+                        @if($schedule->stipend_amount)
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Stipend Amount</h4>
+                                <p class="text-gray-900">₱{{ number_format($schedule->stipend_amount, 2) }}</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
 
             <!-- Notes -->
             @if($schedule->notes)
