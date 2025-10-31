@@ -70,7 +70,7 @@
                                {{ old('sacrament_type') == 'burial' ? 'checked' : '' }}
                                class="sr-only peer" x-model="selectedType">
                         <i class="fas fa-cross text-3xl text-purple-600 mb-2"></i>
-                        <span class="text-sm font-medium text-gray-900">Burial</span>
+                        <span class="text-sm font-medium text-gray-900">Funeral</span>
                     </label>
 
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"
@@ -751,7 +751,7 @@
                             </div>
                             <div class="flex items-center gap-1">
                                 <span class="w-3 h-3 bg-purple-500 rounded"></span>
-                                <span class="text-gray-600">Burial</span>
+                                <span class="text-gray-600">Funeral</span>
                             </div>
                             <div class="flex items-center gap-1">
                                 <span class="w-3 h-3 bg-indigo-500 rounded"></span>

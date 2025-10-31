@@ -55,7 +55,7 @@
                                {{ old('sacrament_type', $schedule->sacrament_type) == 'burial' ? 'checked' : '' }}
                                class="sr-only peer" x-model="selectedType">
                         <i class="fas fa-cross text-3xl text-purple-600 mb-2"></i>
-                        <span class="text-sm font-medium text-gray-900">Burial</span>
+                        <span class="text-sm font-medium text-gray-900">Funeral</span>
                     </label>
 
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"

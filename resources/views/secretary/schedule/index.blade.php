@@ -113,7 +113,7 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                             <option value="">All Types</option>
                             <option value="Baptism" {{ request('sacrament_type') == 'Baptism' ? 'selected' : '' }}>Baptism</option>
-                            <option value="burial" {{ request('sacrament_type') == 'burial' ? 'selected' : '' }}>Burial</option>
+                            <option value="burial" {{ request('sacrament_type') == 'burial' ? 'selected' : '' }}>Funeral</option>
                             <option value="confirmation" {{ request('sacrament_type') == 'confirmation' ? 'selected' : '' }}>Confirmation</option>
                             <option value="wedding" {{ request('sacrament_type') == 'wedding' ? 'selected' : '' }}>Wedding</option>
                             <option value="blessing" {{ request('sacrament_type') == 'blessing' ? 'selected' : '' }}>Blessing</option>

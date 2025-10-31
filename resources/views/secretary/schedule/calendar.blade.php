@@ -280,7 +280,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-purple-500"></div>
-                        <span class="text-gray-600">Burial</span>
+                        <span class="text-gray-600">Funeral</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
@@ -329,7 +329,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="w-4 h-4 bg-purple-500 rounded"></div>
-                    <span class="text-sm text-gray-700">Burial</span>
+                    <span class="text-sm text-gray-700">Funeral</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="w-4 h-4 bg-indigo-500 rounded"></div>
