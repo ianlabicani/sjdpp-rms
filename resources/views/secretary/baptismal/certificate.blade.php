@@ -30,72 +30,72 @@
 
         .ornamental-border {
             position: absolute;
-            inset: 0.5in;
+            inset: 0.35in;
             border: 3px double #8B4513;
             border-radius: 8px;
         }
 
         .inner-border {
             position: absolute;
-            inset: 0.6in;
+            inset: 0.42in;
             border: 1px solid #D4AF37;
         }
 
         .header-section {
             text-align: center;
-            padding-top: 0.8in;
+            padding-top: 0.45in;
         }
 
         .church-emblem {
-            width: 1.5in;
-            height: 1.5in;
-            margin: 0 auto 0.2in;
+            width: 1in;
+            height: 1in;
+            margin: 0 auto 0.1in;
         }
 
         .certificate-title {
-            font-size: 28pt;
+            font-size: 22pt;
             font-weight: bold;
             color: #1a472a;
             margin-bottom: 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .certificate-subtitle {
-            font-size: 14pt;
+            font-size: 11pt;
             color: #8B4513;
-            margin-bottom: 0.3in;
+            margin-bottom: 0.1in;
         }
 
         .certifies-text {
-            font-size: 12pt;
+            font-size: 10pt;
             font-style: italic;
-            margin-bottom: 0.25in;
+            margin-bottom: 0.1in;
         }
 
         .child-name {
-            font-size: 24pt;
+            font-size: 20pt;
             font-weight: bold;
             text-decoration: underline;
             text-decoration-color: #D4AF37;
-            text-underline-offset: 8px;
-            margin: 0.25in 0;
+            text-underline-offset: 6px;
+            margin: 0.15in 0;
             color: #1a472a;
         }
 
         .info-section {
-            margin: 0.3in 1.2in;
-            font-size: 11pt;
+            margin: 0.15in 0.8in;
+            font-size: 10pt;
             line-height: 1.8;
         }
 
         .info-row {
             display: flex;
-            margin-bottom: 0.15in;
+            margin-bottom: 0.12in;
             align-items: baseline;
         }
 
         .info-label {
-            width: 2in;
+            width: 1.6in;
             font-weight: 600;
             color: #1a472a;
         }
@@ -103,21 +103,21 @@
         .info-value {
             flex: 1;
             border-bottom: 1px solid #666;
-            padding-bottom: 2px;
+            padding-bottom: 1px;
             color: #000;
         }
 
         .sacrament-details {
-            margin: 0.25in 1.2in;
-            padding: 0.2in;
+            margin: 0.15in 0.8in;
+            padding: 0.15in;
             background: linear-gradient(to right, #f8f9fa, #ffffff, #f8f9fa);
-            border-left: 4px solid #D4AF37;
-            border-right: 4px solid #D4AF37;
+            border-left: 3px solid #D4AF37;
+            border-right: 3px solid #D4AF37;
         }
 
         .record-reference {
-            margin: 0.25in 1.2in;
-            padding: 0.15in;
+            margin: 0.15in 0.8in;
+            padding: 0.12in;
             border: 2px solid #1a472a;
             border-radius: 4px;
             background: #f8f9fa;
@@ -127,7 +127,7 @@
         .record-numbers {
             display: flex;
             justify-content: space-around;
-            margin-top: 0.1in;
+            margin-top: 0.12in;
         }
 
         .record-item {
@@ -135,53 +135,53 @@
         }
 
         .record-item-label {
-            font-size: 9pt;
+            font-size: 8pt;
             color: #666;
         }
 
         .record-item-value {
-            font-size: 14pt;
+            font-size: 12pt;
             font-weight: bold;
             color: #1a472a;
         }
 
         .signature-section {
-            margin: 0.4in 1.2in 0;
+            margin: 0.3in 0.8in 0;
             display: flex;
             justify-content: space-between;
         }
 
         .signature-box {
             text-align: center;
-            width: 2.5in;
+            width: 2in;
         }
 
         .signature-line {
             border-top: 2px solid #000;
-            margin-top: 0.6in;
-            padding-top: 0.1in;
+            margin-top: 0.35in;
+            padding-top: 0.05in;
         }
 
         .signature-role {
-            font-size: 11pt;
+            font-size: 9pt;
             font-weight: 600;
             color: #1a472a;
         }
 
         .footer-seal {
             position: absolute;
-            bottom: 0.8in;
+            bottom: 0.4in;
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 9pt;
+            font-size: 8pt;
             color: #666;
         }
 
         .decorative-line {
             height: 2px;
             background: linear-gradient(to right, transparent, #D4AF37, transparent);
-            margin: 0.15in 0;
+            margin: 0.08in 0;
         }
 
         @media print {
@@ -225,14 +225,14 @@
         <div class="header-section">
             <!-- Church Logo/Emblem -->
             <div class="church-emblem">
-                <img src="{{ asset('images/logo.jpg') }}" alt="Church Emblem" class="w-full h-full object-contain rounded-full border-4 border-yellow-600">
+                <img src="{{ asset('images/shell-logo.png') }}" alt="Church Emblem" class="w-full h-full object-contain rounded-full border-4 border-yellow-600">
             </div>
 
-            <div class="text-lg font-semibold" style="color: #1a472a; margin-bottom: 0.1in;">
+            <div class="text-lg font-semibold" style="color: #1a472a; margin-bottom: 0.05in;">
                 {{ $baptismal->church_name }}
             </div>
 
-            <div class="decorative-line" style="width: 4in; margin: 0.15in auto;"></div>
+            <div class="decorative-line" style="width: 3in; margin: 0.08in auto;"></div>
 
             <div class="certificate-title">CERTIFICATE OF BAPTISM</div>
             <div class="certificate-subtitle">SACRAMENT OF HOLY BAPTISM</div>
@@ -263,8 +263,8 @@
 
         <!-- Sacrament Details -->
         <div class="sacrament-details">
-            <div style="text-align: center; font-weight: 600; font-size: 11pt; color: #1a472a; margin-bottom: 0.15in;">
-                Was Baptized on {{ $baptismal->baptism_date?->format('F d, Y') }}
+            <div style="text-align: center; font-weight: 600; font-size: 11pt; color: #1a472a; margin-bottom: 0.15in; width: 80%; margin: auto;">
+                WAS SOLEMNLY BAPTIZED ACCORDING TO THE RITES OF THE ROMAN CATHOLIC CHURCH on {{ $baptismal->baptism_date?->format('F d, Y') }}
             </div>
 
             <div class="info-section" style="margin: 0;">
@@ -319,13 +319,13 @@
 
         <!-- Footer Seal -->
         <div class="footer-seal">
-            <div style="font-style: italic; margin-bottom: 0.05in;">
+            <div style="font-style: italic; margin-bottom: 0.02in;">
                 Given at {{ $baptismal->church_name }}
             </div>
-            <div>
+            <div style="font-size: 7pt;">
                 This {{ now()->format('jS') }} day of {{ now()->format('F, Y') }}
             </div>
-            <div style="margin-top: 0.1in; font-size: 8pt;">
+            <div style="margin-top: 0.05in; font-size: 7pt;">
                 <i class="fas fa-certificate" style="color: #D4AF37;"></i>
                 Official Church Document
             </div>
