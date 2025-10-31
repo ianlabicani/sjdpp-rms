@@ -22,7 +22,7 @@
                     </a>
 
                     <!-- Records Dropdown -->
-                    <div class="relative group">
+                    <!-- <div class="relative group">
                         <button class="font-medium transition flex items-center {{ request()->routeIs('priest.records.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
                             <i class="fas fa-book mr-2"></i>Records
                             <i class="fas fa-chevron-down ml-1 text-xs"></i>
@@ -47,7 +47,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Profile Dropdown -->
                     <div class="relative group">

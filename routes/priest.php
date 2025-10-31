@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Priest\ScheduleController;
 use App\Http\Controllers\Priest\RecordController;
+use App\Http\Controllers\Priest\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 // Priest Routes
@@ -18,15 +18,15 @@ Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->grou
     Route::patch('schedule/{schedule}/decline', [ScheduleController::class, 'decline'])->name('schedule.decline');
 
     // View Records (Read-only)
-    Route::get('records/baptismal', [RecordController::class, 'baptismal'])->name('records.baptismal');
-    Route::get('records/baptismal/{baptismal}', [RecordController::class, 'showBaptismal'])->name('records.baptismal.show');
+    // Route::get('records/baptismal', [RecordController::class, 'baptismal'])->name('records.baptismal');
+    // Route::get('records/baptismal/{baptismal}', [RecordController::class, 'showBaptismal'])->name('records.baptismal.show');
 
-    Route::get('records/burial', [RecordController::class, 'burial'])->name('records.burial');
-    Route::get('records/burial/{burial}', [RecordController::class, 'showBurial'])->name('records.burial.show');
+    // Route::get('records/burial', [RecordController::class, 'burial'])->name('records.burial');
+    // Route::get('records/burial/{burial}', [RecordController::class, 'showBurial'])->name('records.burial.show');
 
-    Route::get('records/confirmation', [RecordController::class, 'confirmation'])->name('records.confirmation');
-    Route::get('records/confirmation/{confirmation}', [RecordController::class, 'showConfirmation'])->name('records.confirmation.show');
+    // Route::get('records/confirmation', [RecordController::class, 'confirmation'])->name('records.confirmation');
+    // Route::get('records/confirmation/{confirmation}', [RecordController::class, 'showConfirmation'])->name('records.confirmation.show');
 
-    Route::get('records/wedding', [RecordController::class, 'wedding'])->name('records.wedding');
-    Route::get('records/wedding/{wedding}', [RecordController::class, 'showWedding'])->name('records.wedding.show');
+    // Route::get('records/wedding', [RecordController::class, 'wedding'])->name('records.wedding');
+    // Route::get('records/wedding/{wedding}', [RecordController::class, 'showWedding'])->name('records.wedding.show');
 });
