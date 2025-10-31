@@ -5,7 +5,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $schedule->sacrament_type_color }}-200 text-{{ $schedule->sacrament_type_color }}-800">
-                            @if($schedule->sacrament_type == 'baptismal')
+                            @if($schedule->sacrament_type == 'Baptism')
                                 <i class="fas fa-water mr-2"></i>
                             @elseif($schedule->sacrament_type == 'burial')
                                 <i class="fas fa-cross mr-2"></i>

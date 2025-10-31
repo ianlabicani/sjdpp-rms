@@ -56,12 +56,12 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Existing Sacraments -->
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"
-                           :class="selectedType === 'baptismal' ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-300 hover:border-blue-500'">
-                        <input type="radio" name="sacrament_type" value="baptismal"
-                               {{ old('sacrament_type') == 'baptismal' ? 'checked' : '' }}
+                           :class="selectedType === 'Baptism' ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-300 hover:border-blue-500'">
+                        <input type="radio" name="sacrament_type" value="Baptism"
+                               {{ old('sacrament_type') == 'Baptism' ? 'checked' : '' }}
                                class="sr-only peer" x-model="selectedType">
                         <i class="fas fa-water text-3xl text-blue-600 mb-2"></i>
-                        <span class="text-sm font-medium text-gray-900">Baptismal</span>
+                        <span class="text-sm font-medium text-gray-900">Baptism</span>
                     </label>
 
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"
@@ -747,7 +747,7 @@
                         <div class="grid grid-cols-2 gap-2 text-xs">
                             <div class="flex items-center gap-1">
                                 <span class="w-3 h-3 bg-blue-500 rounded"></span>
-                                <span class="text-gray-600">Baptismal</span>
+                                <span class="text-gray-600">Baptism</span>
                             </div>
                             <div class="flex items-center gap-1">
                                 <span class="w-3 h-3 bg-purple-500 rounded"></span>
@@ -849,7 +849,7 @@
             });
 
             const colors = {
-                baptismal: 'blue',
+                Baptism: 'blue',
                 burial: 'purple',
                 confirmation: 'indigo',
                 wedding: 'pink',
@@ -868,7 +868,7 @@
             };
 
             const icons = {
-                baptismal: 'fa-water',
+                Baptism: 'fa-water',
                 burial: 'fa-cross',
                 confirmation: 'fa-hands-praying',
                 wedding: 'fa-heart',

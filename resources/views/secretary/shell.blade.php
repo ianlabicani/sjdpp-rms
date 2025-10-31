@@ -19,19 +19,19 @@
 
                     <!-- Records Dropdown -->
                     <div class="relative group">
-                        <button class="font-medium transition flex items-center {{ request()->routeIs('secretary.baptismal.*') || request()->routeIs('secretary.burial.*') || request()->routeIs('secretary.confirmation.*') || request()->routeIs('secretary.wedding.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <button class="font-medium transition flex items-center {{ request()->routeIs('secretary.Baptism.*') || request()->routeIs('secretary.burial.*') || request()->routeIs('secretary.confirmation.*') || request()->routeIs('secretary.wedding.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
                             <i class="fas fa-book mr-2"></i>Records
                             <i class="fas fa-chevron-down ml-1 text-xs"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <div class="py-2">
-                                <a href="{{ route('secretary.baptismal.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.baptismal.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+                                <a href="{{ route('secretary.baptismal.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.Baptism.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
                                     <i class="fas fa-water w-5 mr-3 text-blue-600"></i>
-                                    <span class="font-medium">Baptismal</span>
+                                    <span class="font-medium">Baptism</span>
                                 </a>
                                 <a href="{{ route('secretary.burial.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.burial.*') ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600' }}">
                                     <i class="fas fa-cross w-5 mr-3 text-purple-600"></i>
-                                    <span class="font-medium">Burial</span>
+                                    <span class="font-medium">Funeral</span>
                                 </a>
                                 <a href="{{ route('secretary.confirmation.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.confirmation.*') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-600' }}">
                                     <i class="fas fa-hands-praying w-5 mr-3 text-indigo-600"></i>
@@ -50,37 +50,6 @@
                     </a>
 
                     <!-- Quick Create Dropdown -->
-                    <!-- <div class="relative group">
-                        <button class="font-medium text-gray-700 hover:text-blue-600 transition flex items-center">
-                            <i class="fas fa-plus-circle mr-2"></i>Quick Create
-                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                        </button>
-                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                            <div class="py-2">
-                                <a href="{{ route('secretary.baptismal.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
-                                    <i class="fas fa-water w-5 mr-3 text-blue-600"></i>
-                                    <span class="font-medium">New Baptismal</span>
-                                </a>
-                                <a href="{{ route('secretary.burial.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">
-                                    <i class="fas fa-cross w-5 mr-3 text-purple-600"></i>
-                                    <span class="font-medium">New Burial</span>
-                                </a>
-                                <a href="{{ route('secretary.confirmation.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
-                                    <i class="fas fa-hands-praying w-5 mr-3 text-indigo-600"></i>
-                                    <span class="font-medium">New Confirmation</span>
-                                </a>
-                                <a href="{{ route('secretary.wedding.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition">
-                                    <i class="fas fa-heart w-5 mr-3 text-pink-600"></i>
-                                    <span class="font-medium">New Wedding</span>
-                                </a>
-                                <div class="border-t border-gray-200 my-2"></div>
-                                <a href="{{ route('secretary.schedule.create') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition">
-                                    <i class="fas fa-calendar-plus w-5 mr-3 text-orange-600"></i>
-                                    <span class="font-medium">New Schedule</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div> -->
 
                     <!-- Profile Dropdown -->
                     <div class="relative group">

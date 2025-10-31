@@ -195,7 +195,7 @@
                                 <i class="fas fa-water text-white text-xl"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 group-hover:text-green-600">Baptismal Records</h3>
+                                <h3 class="font-semibold text-gray-800 group-hover:text-green-600">Baptism Records</h3>
                                 <p class="text-sm text-gray-600">Manage baptism certificates</p>
                             </div>
                         </a>

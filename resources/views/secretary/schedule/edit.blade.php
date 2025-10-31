@@ -41,12 +41,12 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Existing Sacraments -->
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"
-                           :class="selectedType === 'baptismal' ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-300 hover:border-blue-500'">
-                        <input type="radio" name="sacrament_type" value="baptismal"
-                               {{ old('sacrament_type', $schedule->sacrament_type) == 'baptismal' ? 'checked' : '' }}
+                           :class="selectedType === 'Baptism' ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-300 hover:border-blue-500'">
+                        <input type="radio" name="sacrament_type" value="Baptism"
+                               {{ old('sacrament_type', $schedule->sacrament_type) == 'Baptism' ? 'checked' : '' }}
                                class="sr-only peer" x-model="selectedType">
                         <i class="fas fa-water text-3xl text-blue-600 mb-2"></i>
-                        <span class="text-sm font-medium text-gray-900">Baptismal</span>
+                        <span class="text-sm font-medium text-gray-900">Baptism</span>
                     </label>
 
                     <label class="relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition"

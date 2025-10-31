@@ -1,14 +1,14 @@
 @extends('priest.shell')
 
-@section('title', 'Baptismal Records')
+@section('title', 'Baptism Records')
 
 @section('priest-content')
     <div class="min-h-screen bg-gray-50 py-8 pt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">Baptismal Records</h1>
-            <p class="text-gray-600 mt-1">View baptismal records (Read-only)</p>
+            <h1 class="text-3xl font-bold text-gray-900">Baptism Records</h1>
+            <p class="text-gray-600 mt-1">View Baptism records (Read-only)</p>
         </div>
 
         <!-- Statistics -->
@@ -18,7 +18,7 @@
                     <i class="fas fa-water text-2xl text-blue-600"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-gray-600">Total Baptismal Records</p>
+                    <p class="text-sm text-gray-600">Total Baptism Records</p>
                     <p class="text-2xl font-bold text-gray-900">{{ $total }}</p>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                             <tr>
                                 <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                                     <i class="fas fa-water text-4xl mb-3 text-gray-300"></i>
-                                    <p class="text-lg font-medium">No baptismal records found</p>
+                                    <p class="text-lg font-medium">No Baptism records found</p>
                                 </td>
                             </tr>
                         @endforelse

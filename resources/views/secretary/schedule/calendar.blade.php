@@ -211,7 +211,7 @@
                                     </div>
                                     <div class="flex items-center gap-1 mt-1">
                                         <span class="px-1 py-0.5 text-xs rounded bg-{{ $schedule->sacrament_type_color }}-200 text-{{ $schedule->sacrament_type_color }}-800">
-                                            @if($schedule->sacrament_type == 'baptismal')
+                                            @if($schedule->sacrament_type == 'Baptism')
                                                 <i class="fas fa-water"></i>
                                             @elseif($schedule->sacrament_type == 'burial')
                                                 <i class="fas fa-cross"></i>
@@ -276,7 +276,7 @@
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span class="text-gray-600">Baptismal</span>
+                        <span class="text-gray-600">Baptism</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-purple-500"></div>
@@ -325,7 +325,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="flex items-center gap-2">
                     <div class="w-4 h-4 bg-blue-500 rounded"></div>
-                    <span class="text-sm text-gray-700">Baptismal</span>
+                    <span class="text-sm text-gray-700">Baptism</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="w-4 h-4 bg-purple-500 rounded"></div>
@@ -369,7 +369,7 @@
     // Function to get sacrament icon
     function getSacramentIcon(type) {
         const icons = {
-            'baptismal': 'fa-water',
+            'Baptism': 'fa-water',
             'burial': 'fa-cross',
             'confirmation': 'fa-hands-praying',
             'wedding': 'fa-heart',
@@ -384,7 +384,7 @@
     // Function to get sacrament color
     function getSacramentColor(type) {
         const colors = {
-            'baptismal': 'blue',
+            'Baptism': 'blue',
             'burial': 'purple',
             'confirmation': 'indigo',
             'wedding': 'pink',

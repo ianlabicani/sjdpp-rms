@@ -46,7 +46,7 @@
                         <label class="block text-sm font-medium text-gray-500 mb-1">Sacrament Type</label>
                         <div class="flex items-center gap-2">
                             <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-{{ $schedule->sacrament_type_color }}-100 text-{{ $schedule->sacrament_type_color }}-800">
-                                @if($schedule->sacrament_type == 'baptismal')
+                                @if($schedule->sacrament_type == 'Baptism')
                                     <i class="fas fa-water mr-2"></i>
                                 @elseif($schedule->sacrament_type == 'burial')
                                     <i class="fas fa-cross mr-2"></i>

@@ -206,7 +206,7 @@
                                     <div class="truncate">{{ $schedule->client_name }}</div>
                                     <div class="flex items-center gap-1 mt-1">
                                         <span class="px-1 py-0.5 text-xs rounded
-                                              @if($schedule->sacrament_type == 'baptismal') bg-blue-200 text-blue-800
+                                              @if($schedule->sacrament_type == 'Baptism') bg-blue-200 text-blue-800
                                               @elseif($schedule->sacrament_type == 'burial') bg-purple-200 text-purple-800
                                               @elseif($schedule->sacrament_type == 'confirmation') bg-indigo-200 text-indigo-800
                                               @elseif($schedule->sacrament_type == 'wedding') bg-pink-200 text-pink-800
@@ -216,7 +216,7 @@
                                               @elseif($schedule->sacrament_type == 'school_mass') bg-amber-200 text-amber-800
                                               @else bg-gray-200 text-gray-800
                                               @endif">
-                                            @if($schedule->sacrament_type == 'baptismal')
+                                            @if($schedule->sacrament_type == 'Baptism')
                                                 <i class="fas fa-water"></i>
                                             @elseif($schedule->sacrament_type == 'burial')
                                                 <i class="fas fa-cross"></i>
@@ -295,7 +295,7 @@
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span class="text-gray-600">Baptismal</span>
+                        <span class="text-gray-600">Baptism</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-purple-500"></div>
@@ -365,7 +365,7 @@
     // Function to get sacrament icon
     function getSacramentIcon(type) {
         const icons = {
-            'baptismal': 'fa-water',
+            'Baptism': 'fa-water',
             'burial': 'fa-cross',
             'confirmation': 'fa-hands-praying',
             'wedding': 'fa-heart',
@@ -380,7 +380,7 @@
     // Function to get sacrament color
     function getSacramentColor(type) {
         const colors = {
-            'baptismal': 'blue',
+            'Baptism': 'blue',
             'burial': 'purple',
             'confirmation': 'indigo',
             'wedding': 'pink',

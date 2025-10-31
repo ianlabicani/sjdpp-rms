@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Edit Baptismal Record')
+@section('title', 'Edit Baptism Record')
 
 @section('secretary-content')
 
@@ -14,8 +14,8 @@
                         <i class="fas fa-arrow-left text-xl"></i>
                     </a>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-800">Edit Baptismal Record</h1>
-                        <p class="text-gray-600 mt-2">Update baptismal certificate record</p>
+                        <h1 class="text-3xl font-bold text-gray-800">Edit Baptism Record</h1>
+                        <p class="text-gray-600 mt-2">Update Baptism certificate record</p>
                     </div>
                 </div>
             </div>

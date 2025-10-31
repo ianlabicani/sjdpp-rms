@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Baptismal Records')
+@section('title', 'Baptism Records')
 
 @section('secretary-content')
 
@@ -10,8 +10,8 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800">Baptismal Records</h1>
-                    <p class="text-gray-600 mt-2">Manage all baptismal certificates and records</p>
+                    <h1 class="text-3xl font-bold text-gray-800">Baptism Records</h1>
+                    <p class="text-gray-600 mt-2">Manage all Baptism certificates and records</p>
                 </div>
                 <a href="{{ route('secretary.baptismal.create') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium inline-flex items-center">
                     <i class="fas fa-plus mr-2"></i>Add New Record
@@ -86,7 +86,7 @@
                 </form>
             </div>
 
-            <!-- Baptismal Records Table -->
+            <!-- Baptism Records Table -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full">
@@ -101,34 +101,34 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            @forelse ($baptismals as $baptismal)
+                            @forelse ($baptismals as $Baptism)
                                 <tr class="hover:bg-gray-50 transition">
                                     <td class="px-6 py-4">
-                                        <div class="font-medium text-gray-800">{{ $baptismal->name }}</div>
+                                        <div class="font-medium text-gray-800">{{ $Baptism->name }}</div>
                                         <div class="text-sm text-gray-600">
-                                            Parents: {{ $baptismal->fathers_name }} & {{ $baptismal->mothers_name }}
+                                            Parents: {{ $Baptism->fathers_name }} & {{ $Baptism->mothers_name }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 text-gray-700">
-                                        {{ $baptismal->birth_date->format('M d, Y') }}
+                                        {{ $Baptism->birth_date->format('M d, Y') }}
                                     </td>
                                     <td class="px-6 py-4 text-gray-700">
-                                        {{ $baptismal->baptism_date->format('M d, Y') }}
+                                        {{ $Baptism->baptism_date->format('M d, Y') }}
                                     </td>
                                     <td class="px-6 py-4 text-gray-700">
-                                        {{ $baptismal->church_name }}
+                                        {{ $Baptism->church_name }}
                                     </td>
                                     <td class="px-6 py-4 text-gray-700">
                                         <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                                            {{ $baptismal->book_number }}/{{ $baptismal->page_number }}/{{ $baptismal->line_number }}
+                                            {{ $Baptism->book_number }}/{{ $Baptism->page_number }}/{{ $Baptism->line_number }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
-                                            <a href="{{ route('secretary.baptismal.show', $baptismal) }}" class="text-blue-600 hover:text-blue-800 transition" title="View">
+                                            <a href="{{ route('secretary.baptismal.show', $Baptism) }}" class="text-blue-600 hover:text-blue-800 transition" title="View">
                                                 <i class="fas fa-eye text-lg"></i>
                                             </a>
-                                            <a href="{{ route('secretary.baptismal.edit', $baptismal) }}" class="text-green-600 hover:text-green-800 transition" title="Edit">
+                                            <a href="{{ route('secretary.baptismal.edit', $Baptism) }}" class="text-green-600 hover:text-green-800 transition" title="Edit">
                                                 <i class="fas fa-edit text-lg"></i>
                                             </a>
                                         </div>
@@ -138,7 +138,7 @@
                                 <tr>
                                     <td colspan="6" class="px-6 py-12 text-center text-gray-500">
                                         <i class="fas fa-inbox text-4xl mb-4 text-gray-400"></i>
-                                        <p class="text-lg">No baptismal records found</p>
+                                        <p class="text-lg">No Baptism records found</p>
                                         <a href="{{ route('secretary.baptismal.create') }}" class="text-blue-600 hover:text-blue-800 mt-2 inline-block">
                                             Add your first record
                                         </a>

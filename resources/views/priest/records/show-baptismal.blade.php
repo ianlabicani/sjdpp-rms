@@ -1,6 +1,6 @@
 @extends('priest.shell')
 
-@section('title', 'Baptismal Record Details')
+@section('title', 'Baptism Record Details')
 
 @section('priest-content')
     <div class="min-h-screen bg-gray-50 py-8 pt-20">
@@ -11,15 +11,15 @@
                     href="{{ route('priest.records.baptismal') }}"
                     class="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
                 >
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Baptismal Records
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Baptism Records
                 </a>
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
                         <i class="fas fa-baby text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Baptismal Record Details</h1>
-                        <p class="mt-1 text-sm text-gray-600">View complete baptismal record information</p>
+                        <h1 class="text-3xl font-bold text-gray-900">Baptism Record Details</h1>
+                        <p class="mt-1 text-sm text-gray-600">View complete Baptism record information</p>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Child's Name</label>
-                                <p class="text-base font-semibold text-gray-900">{{ $baptismal->name }}</p>
+                                <p class="text-base font-semibold text-gray-900">{{ $Baptism->name }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Birth Date</label>
                                 <p class="text-base text-gray-900">
-                                    {{ $baptismal->birth_date ? $baptismal->birth_date->format('F d, Y') : 'N/A' }}
+                                    {{ $Baptism->birth_date ? $Baptism->birth_date->format('F d, Y') : 'N/A' }}
                                 </p>
                             </div>
                         </div>
@@ -63,16 +63,16 @@
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Baptism Date</label>
                                 <p class="text-base text-gray-900">
-                                    {{ $baptismal->baptism_date ? $baptismal->baptism_date->format('F d, Y') : 'N/A' }}
+                                    {{ $Baptism->baptism_date ? $Baptism->baptism_date->format('F d, Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Church Name</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->church_name ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->church_name ?? 'N/A' }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Presiding Priest</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->priest_name ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->priest_name ?? 'N/A' }}</p>
                             </div>
                         </div>
                     </div>
@@ -85,11 +85,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Father's Name</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->fathers_name ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->fathers_name ?? 'N/A' }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Mother's Name</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->mothers_name ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->mothers_name ?? 'N/A' }}</p>
                             </div>
                         </div>
                     </div>
@@ -102,11 +102,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Primary Sponsor</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->sponsor ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->sponsor ?? 'N/A' }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Secondary Sponsor</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->secondary_sponsor ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->secondary_sponsor ?? 'N/A' }}</p>
                             </div>
                         </div>
                     </div>
@@ -119,15 +119,15 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Book Number</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->book_number ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->book_number ?? 'N/A' }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Page Number</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->page_number ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->page_number ?? 'N/A' }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Line Number</label>
-                                <p class="text-base text-gray-900">{{ $baptismal->line_number ?? 'N/A' }}</p>
+                                <p class="text-base text-gray-900">{{ $Baptism->line_number ?? 'N/A' }}</p>
                             </div>
                         </div>
                     </div>
@@ -141,13 +141,13 @@
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Record Created</label>
                                 <p class="text-base text-gray-900">
-                                    {{ $baptismal->created_at ? $baptismal->created_at->format('F d, Y - h:i A') : 'N/A' }}
+                                    {{ $Baptism->created_at ? $Baptism->created_at->format('F d, Y - h:i A') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 <label class="block text-sm font-medium text-gray-600 mb-1">Last Updated</label>
                                 <p class="text-base text-gray-900">
-                                    {{ $baptismal->updated_at ? $baptismal->updated_at->format('F d, Y - h:i A') : 'N/A' }}
+                                    {{ $Baptism->updated_at ? $Baptism->updated_at->format('F d, Y - h:i A') : 'N/A' }}
                                 </p>
                             </div>
                         </div>
