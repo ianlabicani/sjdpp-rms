@@ -25,6 +25,5 @@
     <body>
 
     @yield('content')
-s
     </body>
 </html>
