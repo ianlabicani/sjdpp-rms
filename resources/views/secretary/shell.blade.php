@@ -50,7 +50,7 @@
                     </a>
 
                     <!-- Quick Create Dropdown -->
-                    <div class="relative group">
+                    <!-- <div class="relative group">
                         <button class="font-medium text-gray-700 hover:text-blue-600 transition flex items-center">
                             <i class="fas fa-plus-circle mr-2"></i>Quick Create
                             <i class="fas fa-chevron-down ml-1 text-xs"></i>
@@ -80,7 +80,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Profile Dropdown -->
                     <div class="relative group">
