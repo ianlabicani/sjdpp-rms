@@ -131,13 +131,6 @@
                                             <a href="{{ route('secretary.baptismal.edit', $baptismal) }}" class="text-green-600 hover:text-green-800 transition" title="Edit">
                                                 <i class="fas fa-edit text-lg"></i>
                                             </a>
-                                            <form action="{{ route('secretary.baptismal.destroy', $baptismal) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-800 transition" title="Delete">
-                                                    <i class="fas fa-trash text-lg"></i>
-                                                </button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
