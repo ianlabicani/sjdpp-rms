@@ -12,6 +12,10 @@
             margin: 0;
         }
 
+        @page :first {
+            margin: 0;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -26,162 +30,132 @@
             position: relative;
             background: white;
             font-family: 'Times New Roman', serif;
+            background-image: url('{{ asset('images/baptismal-pdf-bg.jpg') }}');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .ornamental-border {
-            position: absolute;
-            inset: 0.35in;
-            border: 3px double #8B4513;
-            border-radius: 8px;
+        .certificate-container-page2 {
+            width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            position: relative;
+            background: white;
+            font-family: 'Times New Roman', serif;
         }
 
-        .inner-border {
-            position: absolute;
-            inset: 0.42in;
-            border: 1px solid #D4AF37;
-        }
-
-        .header-section {
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 1.2in 1.5in;
             text-align: center;
-            padding-top: 0.45in;
         }
 
-        .church-emblem {
-            width: 1in;
-            height: 1in;
-            margin: 0 auto 0.1in;
+        .content-wrapper-page2 {
+            position: relative;
+            z-index: 1;
+            padding: 2in 1.5in;
+            text-align: center;
+        }
+
+        .page-break {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .church-header {
+            margin-bottom: 0.4in;
+        }
+
+        .archdiocese {
+            font-size: 11pt;
+            color: #000;
+            margin-bottom: 0.05in;
+        }
+
+        .parish-name {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 0.05in;
+            letter-spacing: 0.5px;
+        }
+
+        .parish-address {
+            font-size: 10pt;
+            color: #000;
+            margin-bottom: 0.3in;
         }
 
         .certificate-title {
-            font-size: 22pt;
+            font-size: 18pt;
             font-weight: bold;
-            color: #1a472a;
-            margin-bottom: 0;
-            letter-spacing: 1px;
-        }
-
-        .certificate-subtitle {
-            font-size: 11pt;
-            color: #8B4513;
-            margin-bottom: 0.1in;
+            color: #000;
+            letter-spacing: 2px;
+            margin-bottom: 0.25in;
+            text-decoration: underline;
         }
 
         .certifies-text {
-            font-size: 10pt;
-            font-style: italic;
-            margin-bottom: 0.1in;
-        }
-
-        .child-name {
-            font-size: 20pt;
-            font-weight: bold;
-            text-decoration: underline;
-            text-decoration-color: #D4AF37;
-            text-underline-offset: 6px;
-            margin: 0.15in 0;
-            color: #1a472a;
-        }
-
-        .info-section {
-            margin: 0.15in 0.8in;
-            font-size: 10pt;
-            line-height: 1.8;
-        }
-
-        .info-row {
-            display: flex;
-            margin-bottom: 0.12in;
-            align-items: baseline;
-        }
-
-        .info-label {
-            width: 1.6in;
-            font-weight: 600;
-            color: #1a472a;
-        }
-
-        .info-value {
-            flex: 1;
-            border-bottom: 1px solid #666;
-            padding-bottom: 1px;
+            font-size: 11pt;
+            margin-bottom: 0.15in;
             color: #000;
         }
 
-        .sacrament-details {
-            margin: 0.15in 0.8in;
-            padding: 0.15in;
-            background: linear-gradient(to right, #f8f9fa, #ffffff, #f8f9fa);
-            border-left: 3px solid #D4AF37;
-            border-right: 3px solid #D4AF37;
+        .baptized-name {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #000;
+            margin: 0.2in 0;
+            text-transform: uppercase;
         }
 
-        .record-reference {
-            margin: 0.15in 0.8in;
-            padding: 0.12in;
-            border: 2px solid #1a472a;
-            border-radius: 4px;
-            background: #f8f9fa;
-            text-align: center;
+        .body-text {
+            font-size: 11pt;
+            line-height: 1.8;
+            color: #000;
+            margin-bottom: 0.15in;
         }
 
-        .record-numbers {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 0.12in;
-        }
-
-        .record-item {
-            text-align: center;
-        }
-
-        .record-item-label {
-            font-size: 8pt;
-            color: #666;
-        }
-
-        .record-item-value {
+        .emphasis-text {
             font-size: 12pt;
             font-weight: bold;
-            color: #1a472a;
+            color: #000;
+            text-transform: uppercase;
+            margin: 0.2in 0;
+            line-height: 1.6;
+        }
+
+        .registry-text {
+            font-size: 10pt;
+            color: #000;
+            margin: 0.2in 0;
+            line-height: 1.6;
+        }
+
+        .issued-text {
+            font-size: 10pt;
+            color: #000;
+            margin: 0.3in 0;
         }
 
         .signature-section {
-            margin: 0.3in 0.8in 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .signature-box {
+            margin-top: 0.5in;
             text-align: center;
-            width: 2in;
         }
 
-        .signature-line {
-            border-top: 2px solid #000;
-            margin-top: 0.35in;
-            padding-top: 0.05in;
+        .priest-name {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 0.05in;
         }
 
-        .signature-role {
-            font-size: 9pt;
-            font-weight: 600;
-            color: #1a472a;
-        }
-
-        .footer-seal {
-            position: absolute;
-            bottom: 0.4in;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 8pt;
-            color: #666;
-        }
-
-        .decorative-line {
-            height: 2px;
-            background: linear-gradient(to right, transparent, #D4AF37, transparent);
-            margin: 0.08in 0;
+        .priest-title {
+            font-size: 11pt;
+            color: #000;
         }
 
         @media print {
@@ -193,13 +167,30 @@
                 display: none !important;
             }
             .certificate-container {
-                page-break-after: avoid;
+                page-break-after: always;
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .certificate-container-page2 {
+                page-break-after: always;
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page-break {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            @page {
+                margin: 0;
+                size: letter;
             }
         }
 
         @media screen {
             body {
-                background: #gray-100;
+                background: #e5e7eb;
                 padding: 20px;
             }
         }
@@ -208,7 +199,7 @@
 <body>
     <!-- Print Button (Only visible on screen) -->
     <div class="no-print fixed top-4 right-4 z-50">
-        <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition">
+        <button onclick="printCertificate()" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition">
             <i class="fas fa-print mr-2"></i>Print Certificate
         </button>
         <button onclick="window.close()" class="ml-2 bg-gray-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-gray-700 transition">
@@ -216,118 +207,89 @@
         </button>
     </div>
 
-    <div class="certificate-container">
-        <!-- Ornamental Borders -->
-        <div class="ornamental-border"></div>
-        <div class="inner-border"></div>
+    <script>
+        function printCertificate() {
+            window.print();
+        }
+    </script>
 
-        <!-- Header Section -->
-        <div class="header-section">
-            <!-- Church Logo/Emblem -->
-            <div class="church-emblem">
-                <img src="{{ asset('images/shell-logo.png') }}" alt="Church Emblem" class="w-full h-full object-contain rounded-full border-4 border-yellow-600">
+    <div class="certificate-container page-break">
+        <div class="content-wrapper">
+            <!-- Church Header -->
+            <div class="church-header">
+                <div class="archdiocese">Archdiocese of Tuguegarao</div>
+                <div class="parish-name">{{ strtoupper($baptismal->church_name) }}</div>
+                <div class="parish-address">Sapping, Camalaniugan, Cagayan</div>
             </div>
 
-            <div class="text-lg font-semibold" style="color: #1a472a; margin-bottom: 0.05in;">
-                {{ $baptismal->church_name }}
-            </div>
-
-            <div class="decorative-line" style="width: 3in; margin: 0.08in auto;"></div>
-
+            <!-- Certificate Title -->
             <div class="certificate-title">CERTIFICATE OF BAPTISM</div>
-            <div class="certificate-subtitle">SACRAMENT OF HOLY BAPTISM</div>
-        </div>
 
-        <!-- Certifies Text -->
-        <div class="certifies-text" style="text-align: center; padding: 0 1.5in;">
-            This is to certify that
-        </div>
+            <!-- Certifies Text -->
+            <div class="certifies-text">This is to certify that</div>
 
-        <!-- Child's Name -->
-        <div class="child-name" style="text-align: center;">
-            {{ strtoupper($baptismal->name) }}
-        </div>
+            <!-- Baptized Name -->
+            <div class="baptized-name">{{ strtoupper($baptismal->name) }}</div>
 
-        <!-- Information Section -->
-        <div class="info-section">
-            <div class="info-row">
-                <div class="info-label">Born on:</div>
-                <div class="info-value">{{ $baptismal->birth_date?->format('F d, Y') }}</div>
+            <!-- Parent Information -->
+            <div class="body-text">
+                child of Mr. {{ $baptismal->fathers_name }}<br>
+                and Ms. {{ $baptismal->mothers_name }}<br>
+                born in {{ $baptismal->birth_place ?? 'Tuguegarao City, Cagayan' }}<br>
+                on the {{ $baptismal->birth_date?->format('jS') }} day of {{ $baptismal->birth_date?->format('F Y') }}
             </div>
 
-            <div class="info-row">
-                <div class="info-label">Child of:</div>
-                <div class="info-value">{{ $baptismal->fathers_name }} and {{ $baptismal->mothers_name }}</div>
-            </div>
-        </div>
-
-        <!-- Sacrament Details -->
-        <div class="sacrament-details">
-            <div style="text-align: center; font-weight: 600; font-size: 11pt; color: #1a472a; margin-bottom: 0.15in; width: 80%; margin: auto;">
-                WAS SOLEMNLY BAPTIZED ACCORDING TO THE RITES OF THE ROMAN CATHOLIC CHURCH on {{ $baptismal->baptism_date?->format('F d, Y') }}
+            <!-- Baptism Declaration -->
+            <div class="emphasis-text">
+                WAS SOLEMNLY BAPTIZED<br>
+                ACCORDING TO THE RITES<br>
+                OF THE ROMAN CATHOLIC CHURCH
             </div>
 
-            <div class="info-section" style="margin: 0;">
-                <div class="info-row">
-                    <div class="info-label">Minister:</div>
-                    <div class="info-value">{{ $baptismal->priest_name }}</div>
-                </div>
-
-                <div class="info-row">
-                    <div class="info-label">Sponsor(s):</div>
-                    <div class="info-value">
-                        {{ $baptismal->sponsor }}{{ $baptismal->secondary_sponsor ? ', ' . $baptismal->secondary_sponsor : '' }}
-                    </div>
-                </div>
+            <!-- Baptism Details -->
+            <div class="body-text">
+                on the {{ $baptismal->baptism_date?->format('jS') }} day of {{ $baptismal->baptism_date?->format('F Y') }}<br>
+                by the Rev. Fr. {{ $baptismal->priest_name }}
             </div>
-        </div>
 
-        <!-- Record Reference -->
-        <div class="record-reference">
-            <div style="font-size: 10pt; font-weight: 600; color: #1a472a; margin-bottom: 0.1in;">
-                REGISTRY REFERENCE
+            <!-- Registry Reference -->
+            <div class="registry-text">
+                as it appears from the Baptismal Register Book<br>
+                no. <strong>{{ $baptismal->book_number }}</strong>,
+                Page no. <strong>{{ $baptismal->page_number }}</strong>,
+                Line No. <strong>{{ $baptismal->line_number }}</strong>.
             </div>
-            <div class="record-numbers">
-                <div class="record-item">
-                    <div class="record-item-label">Book No.</div>
-                    <div class="record-item-value">{{ $baptismal->book_number }}</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-item-label">Page No.</div>
-                    <div class="record-item-value">{{ $baptismal->page_number }}</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-item-label">Line No.</div>
-                    <div class="record-item-value">{{ $baptismal->line_number }}</div>
-                </div>
+
+            <!-- Issued Date -->
+            <div class="issued-text">
+                Issued on {{ now()->format('F j, Y') }} for General Purposes.
+            </div>
+
+            <!-- Signature Section -->
+            <div class="signature-section">
+                <div class="priest-name">Fr. {{ strtoupper($baptismal->priest_name ?? '') }}</div>
+                <div class="priest-title">Parish Priest</div>
             </div>
         </div>
+    </div>
 
-        <!-- Signature Section -->
-        <div class="signature-section">
-            <div class="signature-box">
-                <div class="signature-line">
-                    <div class="signature-role">Parish Secretary</div>
-                </div>
-            </div>
-            <div class="signature-box">
-                <div class="signature-line">
-                    <div class="signature-role">Parish Priest</div>
-                </div>
-            </div>
-        </div>
+    <!-- Second Page - Sponsors Only -->
+    <div class="certificate-container-page2">
+        <div class="content-wrapper-page2">
+            <!-- Sponsors Section -->
+            <div style="text-align: left; margin-left: 1.5in;">
+                <div style="font-size: 14pt; font-weight: bold; margin-bottom: 0.5in;">SPONSORS:</div>
 
-        <!-- Footer Seal -->
-        <div class="footer-seal">
-            <div style="font-style: italic; margin-bottom: 0.02in;">
-                Given at {{ $baptismal->church_name }}
-            </div>
-            <div style="font-size: 7pt;">
-                This {{ now()->format('jS') }} day of {{ now()->format('F, Y') }}
-            </div>
-            <div style="margin-top: 0.05in; font-size: 7pt;">
-                <i class="fas fa-certificate" style="color: #D4AF37;"></i>
-                Official Church Document
+                <div style="font-size: 12pt; line-height: 2; color: #000;">
+                    <div>• {{ $baptismal->sponsor }}</div>
+                    @if($baptismal->secondary_sponsor)
+                        <div>• {{ $baptismal->secondary_sponsor }}</div>
+                    @endif
+                </div>
+
+                <div style="margin-top: 2in; font-size: 11pt; color: #000;">
+                    NOTHING FOLLOWS..
+                </div>
             </div>
         </div>
     </div>
