@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Add Burial Record')
+@section('title', 'Add Funeral Record')
 
 @section('secretary-content')
 
@@ -14,8 +14,8 @@
                         <i class="fas fa-arrow-left text-xl"></i>
                     </a>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-800">New Burial Record</h1>
-                        <p class="text-gray-600 mt-2">Create a new burial certificate record</p>
+                        <h1 class="text-3xl font-bold text-gray-800">New Funeral Record</h1>
+                        <p class="text-gray-600 mt-2">Create a new funeral certificate record</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <!-- Burial Details Section -->
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-                            <i class="fas fa-cross mr-2 text-purple-600"></i>Burial Details
+                            <i class="fas fa-cross mr-2 text-purple-600"></i>Funeral Details
                         </h3>
 
                         <div class="grid md:grid-cols-2 gap-6">
@@ -109,7 +109,7 @@
 
                             <!-- Place -->
                             <div>
-                                <label for="place" class="block text-sm font-medium text-gray-700 mb-2">Place of Burial <span class="text-red-500">*</span></label>
+                                <label for="place" class="block text-sm font-medium text-gray-700 mb-2">Place of Funeral <span class="text-red-500">*</span></label>
                                 <input type="text" id="place" name="place" value="{{ old('place') }}" required
                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 @error('place')

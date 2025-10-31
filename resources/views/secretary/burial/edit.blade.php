@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Edit Burial Record')
+@section('title', 'Edit Funeral Record')
 
 @section('secretary-content')
 
@@ -14,8 +14,8 @@
                         <i class="fas fa-arrow-left text-xl"></i>
                     </a>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-800">Edit Burial Record</h1>
-                        <p class="text-gray-600 mt-2">Update burial certificate record</p>
+                        <h1 class="text-3xl font-bold text-gray-800">Edit Funeral Record</h1>
+                        <p class="text-gray-600 mt-2">Update funeral certificate record</p>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
 
                             <!-- Date of Burial -->
                             <div>
-                                <label for="date_of_burial" class="block text-sm font-medium text-gray-700 mb-2">Date of Burial <span class="text-red-500">*</span></label>
+                                <label for="date_of_burial" class="block text-sm font-medium text-gray-700 mb-2">Date of Funeral <span class="text-red-500">*</span></label>
                                 <input type="date" id="date_of_burial" name="date_of_burial" value="{{ old('date_of_burial', $burial->date_of_burial?->format('Y-m-d')) }}" required
                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 @error('date_of_burial')
@@ -94,7 +94,7 @@
                     <!-- Burial Details Section -->
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-                            <i class="fas fa-cross mr-2 text-purple-600"></i>Burial Details
+                            <i class="fas fa-cross mr-2 text-purple-600"></i>Funeral Details
                         </h3>
 
                         <div class="grid md:grid-cols-2 gap-6">
@@ -110,7 +110,7 @@
 
                             <!-- Place -->
                             <div>
-                                <label for="place" class="block text-sm font-medium text-gray-700 mb-2">Place of Burial <span class="text-red-500">*</span></label>
+                                <label for="place" class="block text-sm font-medium text-gray-700 mb-2">Place of Funeral <span class="text-red-500">*</span></label>
                                 <input type="text" id="place" name="place" value="{{ old('place', $burial->place) }}" required
                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 @error('place')

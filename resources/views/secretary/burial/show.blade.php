@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Burial Record Details')
+@section('title', 'Funeral Record Details')
 
 @section('secretary-content')
 
@@ -35,7 +35,7 @@
                 <div class="text-center mb-8 border-b-4 border-purple-600 pb-6">
                     <img src="{{ asset('images/logo.jpg') }}" alt="Church Logo" class="h-24 w-24 mx-auto mb-4 rounded-full object-cover">
                     <h1 class="text-4xl font-bold text-gray-800 mb-2">SJDPP Church</h1>
-                    <h2 class="text-2xl font-semibold text-purple-600 mb-4">CERTIFICATE OF BURIAL</h2>
+                    <h2 class="text-2xl font-semibold text-purple-600 mb-4">CERTIFICATE OF FUNERAL</h2>
                     <p class="text-gray-600">This is to certify that</p>
                 </div>
 
