@@ -61,7 +61,7 @@
                         </button>
                         <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <div class="py-2">
-                                <a href="{{ route('profile.edit') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                                <a href="{{ route('secretary.profile.edit') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
                                     <i class="fas fa-user-cog w-5 mr-3 text-blue-600"></i>
                                     <span class="font-medium">Profile Settings</span>
                                 </a>
@@ -82,6 +82,7 @@
     </nav>
 
     <main>
+        <h1>sec</h1>
         @yield('secretary-content')
     </main>
 @endsection

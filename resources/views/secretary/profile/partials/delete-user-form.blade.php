@@ -11,14 +11,14 @@
 
     <button
         x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion-{{ uniqid() }}')"
         class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 transition"
     >Delete Account</button>
 
     <!-- Delete Confirmation Modal -->
     <div
         x-data="{ show: {{ $errors->userDeletion->isNotEmpty() ? 'true' : 'false' }} }"
-        x-on:open-modal.window="$event.detail == 'confirm-user-deletion' ? show = true : null"
+        x-on:open-modal.window="$event.detail == 'confirm-user-deletion-{{ uniqid() }}' ? show = true : null"
         x-on:close.stop="show = false"
         x-on:keydown.escape.window="show = false"
         x-show="show"
@@ -30,7 +30,7 @@
         </div>
 
         <div x-show="show" class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:max-w-md sm:mx-auto">
-            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+            <form method="post" action="{{ route('secretary.profile.destroy') }}" class="p-6">
                 @csrf
                 @method('delete')
 
@@ -43,9 +43,9 @@
                 </p>
 
                 <div class="mt-6">
-                    <label for="password" class="sr-only">Password</label>
+                    <label for="confirm_delete_password" class="sr-only">Password</label>
                     <input
-                        id="password"
+                        id="confirm_delete_password"
                         name="password"
                         type="password"
                         placeholder="Password"

@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\Priest\DashboardController;
+use App\Http\Controllers\Priest\ProfileController;
 use App\Http\Controllers\Priest\RecordController;
 use App\Http\Controllers\Priest\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 // Priest Routes
 Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('priest.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Schedule Management (Review & Approve/Decline)
     Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
@@ -16,6 +16,10 @@ Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->grou
     Route::get('schedule/{schedule}', [ScheduleController::class, 'show'])->name('schedule.show');
     Route::patch('schedule/{schedule}/approve', [ScheduleController::class, 'approve'])->name('schedule.approve');
     Route::patch('schedule/{schedule}/decline', [ScheduleController::class, 'decline'])->name('schedule.decline');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // View Records (Read-only)
     // Route::get('records/baptismal', [RecordController::class, 'baptismal'])->name('records.baptismal');
