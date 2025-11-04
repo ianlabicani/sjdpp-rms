@@ -1,6 +1,6 @@
 @extends('secretary.shell')
 
-@section('title', 'Funeral Records')
+@section('title', 'Death Records')
 
 @section('secretary-content')
 
@@ -10,8 +10,8 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800">Funeral Records</h1>
-                    <p class="text-gray-600 mt-2">Manage all funeral certificates and records</p>
+                    <h1 class="text-3xl font-bold text-gray-800">Death Records</h1>
+                    <p class="text-gray-600 mt-2">Manage all death certificates and records</p>
                 </div>
                 <a href="{{ route('secretary.burial.create') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium inline-flex items-center">
                     <i class="fas fa-plus mr-2"></i>Add New Record
@@ -52,17 +52,17 @@
                         <div class="grid md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-200">
                             <!-- Date Range -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Funeral Date From</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Death Date From</label>
                                 <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Funeral Date To</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Death Date To</label>
                                 <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                             </div>
 
                             <!-- Year Filter -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Funeral Year</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Death Year</label>
                                 <select name="year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                     <option value="">All Years</option>
                                     @foreach($years as $year)
@@ -76,7 +76,7 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
                                 <select name="sort_by" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                     <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Recently Added</option>
-                                    <option value="date_of_burial" {{ request('sort_by') == 'date_of_burial' ? 'selected' : '' }}>Funeral Date</option>
+                                    <option value="date_of_burial" {{ request('sort_by') == 'date_of_burial' ? 'selected' : '' }}>Death Date</option>
                                     <option value="date_of_death" {{ request('sort_by') == 'date_of_death' ? 'selected' : '' }}>Death Date</option>
                                     <option value="name" {{ request('sort_by') == 'name' ? 'selected' : '' }}>Name (A-Z)</option>
                                     <option value="age" {{ request('sort_by') == 'age' ? 'selected' : '' }}>Age</option>
@@ -87,7 +87,7 @@
                 </form>
             </div>
 
-            <!-- Funeral Records Table -->
+            <!-- Death Records Table -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full">
@@ -96,7 +96,7 @@
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Name</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Age</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Date of Death</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Date of Funeral</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Date of Burial</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Status</th>
                                 <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Actions</th>
                             </tr>
@@ -139,7 +139,7 @@
                                 <tr>
                                     <td colspan="6" class="px-6 py-12 text-center text-gray-500">
                                         <i class="fas fa-inbox text-4xl mb-4 text-gray-400"></i>
-                                        <p class="text-lg">No funeral records found</p>
+                                        <p class="text-lg">No death records found</p>
                                         <a href="{{ route('secretary.burial.create') }}" class="text-blue-600 hover:text-blue-800 mt-2 inline-block">
                                             Add your first record
                                         </a>
