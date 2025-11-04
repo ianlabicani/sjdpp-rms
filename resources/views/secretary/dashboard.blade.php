@@ -23,7 +23,7 @@
 
             <!-- Main Statistics Cards -->
             <div class="grid md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                <a href="{{ route('secretary.baptismal.index') }}" class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition cursor-pointer block">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-600 text-sm font-medium">Baptismal Records</p>
@@ -36,9 +36,9 @@
                             <i class="fas fa-water text-blue-600 text-2xl"></i>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                <a href="{{ route('secretary.burial.index') }}" class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition cursor-pointer block">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-600 text-sm font-medium">Burial Records</p>
@@ -51,9 +51,9 @@
                             <i class="fas fa-cross text-purple-600 text-2xl"></i>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                <a href="{{ route('secretary.confirmation.index') }}" class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition cursor-pointer block">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-600 text-sm font-medium">Confirmation Records</p>
@@ -66,9 +66,9 @@
                             <i class="fas fa-hands-praying text-indigo-600 text-2xl"></i>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+                <a href="{{ route('secretary.wedding.index') }}" class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition cursor-pointer block">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-600 text-sm font-medium">Wedding Records</p>
@@ -81,7 +81,7 @@
                             <i class="fas fa-heart text-pink-600 text-2xl"></i>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Schedule Statistics -->
