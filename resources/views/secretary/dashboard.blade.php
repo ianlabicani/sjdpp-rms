@@ -85,64 +85,47 @@
             </div>
 
             <!-- Schedule Statistics -->
-            <div class="grid md:grid-cols-5 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Total Schedules</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['total'] }}</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Schedule Statistics</h2>
+                <div class="grid md:grid-cols-5 gap-6">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-calendar text-gray-600 text-xl"></i>
                         </div>
+                        <p class="text-sm text-gray-600 font-medium mb-2">Total Schedules</p>
+                        <h3 class="text-3xl font-bold text-gray-800">{{ $scheduleStats['total'] }}</h3>
                     </div>
-                </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Pending</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['pending'] }}</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-clock text-yellow-600 text-xl"></i>
                         </div>
+                        <p class="text-sm text-gray-600 font-medium mb-2">Pending</p>
+                        <h3 class="text-3xl font-bold text-gray-800">{{ $scheduleStats['pending'] }}</h3>
                     </div>
-                </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Approved</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['approved'] }}</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-check-circle text-blue-600 text-xl"></i>
                         </div>
+                        <p class="text-sm text-gray-600 font-medium mb-2">Approved</p>
+                        <h3 class="text-3xl font-bold text-gray-800">{{ $scheduleStats['approved'] }}</h3>
                     </div>
-                </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Completed</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['completed'] }}</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-calendar-check text-green-600 text-xl"></i>
                         </div>
+                        <p class="text-sm text-gray-600 font-medium mb-2">Completed</p>
+                        <h3 class="text-3xl font-bold text-gray-800">{{ $scheduleStats['completed'] }}</h3>
                     </div>
-                </div>
 
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm font-medium">Today</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">{{ $scheduleStats['today'] }}</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                    <div class="text-center p-4 bg-orange-50 rounded-lg">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-calendar-day text-orange-600 text-xl"></i>
                         </div>
+                        <p class="text-sm text-gray-600 font-medium mb-2">Today</p>
+                        <h3 class="text-3xl font-bold text-gray-800">{{ $scheduleStats['today'] }}</h3>
                     </div>
                 </div>
             </div>
