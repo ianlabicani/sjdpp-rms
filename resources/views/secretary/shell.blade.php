@@ -26,12 +26,14 @@
                         <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <div class="py-2">
                                 <a href="{{ route('secretary.baptismal.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.Baptism.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-                                    <i class="fas fa-water w-5 mr-3 text-blue-600"></i>
-                                    <span class="font-medium">Baptism</span>
+                                <div class="w-5 h-5 mr-3 flex items-center justify-center">
+                                    <img src="{{ asset('images/shell-only.png') }}" alt="shell-only" class="w-5 h-5 object-contain">
+                                </div>
+                                <span class="font-medium">Baptism</span>
                                 </a>
                                 <a href="{{ route('secretary.burial.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.burial.*') ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600' }}">
                                     <i class="fas fa-cross w-5 mr-3 text-purple-600"></i>
-                                    <span class="font-medium">Funeral</span>
+                                    <span class="font-medium">Death</span>
                                 </a>
                                 <a href="{{ route('secretary.confirmation.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.confirmation.*') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-600' }}">
                                     <i class="fas fa-hands-praying w-5 mr-3 text-indigo-600"></i>
