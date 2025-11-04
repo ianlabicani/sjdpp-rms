@@ -21,7 +21,7 @@
 
                     <!-- Records Dropdown -->
                     <div class="relative group">
-                        <button class="font-medium text-sm md:text-base transition flex items-center {{ request()->routeIs('secretary.baptismal.*') || request()->routeIs('secretary.burial.*') || request()->routeIs('secretary.confirmation.*') || request()->routeIs('secretary.wedding.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <button class="font-medium text-sm md:text-base transition flex items-center {{ request()->routeIs('secretary.baptismal.*') || request()->routeIs('secretary.burial.*') || request()->routeIs('secretary.confirmation.*') || request()->routeIs('secretary.wedding.*') || request()->routeIs('secretary.first-communion.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
                             <i class="fas fa-book mr-1 md:mr-2"></i><span class="hidden md:inline">Records</span>
                             <i class="fas fa-chevron-down ml-0.5 md:ml-1 text-xs"></i>
                         </button>
@@ -44,6 +44,10 @@
                                 <a href="{{ route('secretary.wedding.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.wedding.*') ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-pink-50 hover:text-pink-600' }}">
                                     <i class="fas fa-heart w-5 mr-3 text-pink-600"></i>
                                     <span class="font-medium">Wedding</span>
+                                </a>
+                                <a href="{{ route('secretary.first-communion.index') }}" class="flex items-center px-4 py-3 transition {{ request()->routeIs('secretary.first-communion.*') ? 'bg-teal-50 text-teal-600' : 'text-gray-700 hover:bg-teal-50 hover:text-teal-600' }}">
+                                    <i class="fas fa-water w-5 mr-3 text-teal-600"></i>
+                                    <span class="font-medium">First Communion</span>
                                 </a>
                             </div>
                         </div>
@@ -108,6 +112,9 @@
                             </a>
                             <a href="{{ route('secretary.wedding.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('secretary.wedding.*') ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-pink-50 hover:text-pink-600' }}">
                                 <i class="fas fa-heart mr-2 text-pink-600"></i>Wedding
+                            </a>
+                            <a href="{{ route('secretary.first-communion.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('secretary.first-communion.*') ? 'bg-teal-50 text-teal-600' : 'text-gray-700 hover:bg-teal-50 hover:text-teal-600' }}">
+                                <i class="fas fa-water mr-2 text-teal-600"></i>First Communion
                             </a>
                         </div>
                     </div>
