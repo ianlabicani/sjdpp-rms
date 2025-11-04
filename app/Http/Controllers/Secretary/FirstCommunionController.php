@@ -19,9 +19,11 @@ class FirstCommunionController extends Controller
 
         $communions = FirstCommunion::query()
             ->when($search, function ($query) use ($search) {
-                $query->whereJsonContains('names', $search)
-                    ->orWhereJsonContains('parents', $search)
-                    ->orWhere('address', 'like', "%{$search}%");
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->whereRaw("JSON_SEARCH(names, 'one', CONCAT('%', ?, '%')) IS NOT NULL", [$search])
+                        ->orWhereRaw("JSON_SEARCH(parents, 'one', CONCAT('%', ?, '%')) IS NOT NULL", [$search])
+                        ->orWhere('address', 'like', "%{$search}%");
+                });
             })
             ->when($year, function ($query) use ($year) {
                 $query->where('year', $year);
