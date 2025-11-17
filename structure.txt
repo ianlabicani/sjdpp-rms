@@ -1,0 +1,210 @@
+Folder PATH listing for volume OS
+Volume serial number is 50F6-8512
+C:\USERS\IAN\DESKTOP\PROJECTS\OPEN-SOURCE\SJDPP-RMS\APP
++---Http
+¦   +---Controllers
+¦   ¦   ¦   Controller.php
+¦   ¦   ¦   RoleController.php
+¦   ¦   ¦   
+¦   ¦   +---Auth
+¦   ¦   ¦       AuthenticatedSessionController.php
+¦   ¦   ¦       ConfirmablePasswordController.php
+¦   ¦   ¦       EmailVerificationNotificationController.php
+¦   ¦   ¦       EmailVerificationPromptController.php
+¦   ¦   ¦       NewPasswordController.php
+¦   ¦   ¦       PasswordController.php
+¦   ¦   ¦       PasswordResetLinkController.php
+¦   ¦   ¦       RegisteredUserController.php
+¦   ¦   ¦       VerifyEmailController.php
+¦   ¦   ¦       
+¦   ¦   +---Priest
+¦   ¦   ¦       DashboardController.php
+¦   ¦   ¦       ProfileController.php
+¦   ¦   ¦       RecordController.php
+¦   ¦   ¦       ScheduleController.php
+¦   ¦   ¦       
+¦   ¦   +---Secretary
+¦   ¦           BaptismalController.php
+¦   ¦           BurialController.php
+¦   ¦           ConfirmationController.php
+¦   ¦           DashboardController.php
+¦   ¦           FirstCommunionController.php
+¦   ¦           ProfileController.php
+¦   ¦           ScheduleController.php
+¦   ¦           WeddingController.php
+¦   ¦           
+¦   +---Requests
+¦       ¦   ProfileUpdateRequest.php
+¦       ¦   
+¦       +---Auth
+¦               LoginRequest.php
+¦               
++---Models
+¦       Baptismal.php
+¦       Barangay.php
+¦       Burial.php
+¦       Chapel.php
+¦       Confirmation.php
+¦       FirstCommunion.php
+¦       Role.php
+¦       Schedule.php
+¦       School.php
+¦       User.php
+¦       Wedding.php
+¦       
++---Providers
+¦       AppServiceProvider.php
+¦       
++---View
+    +---Components
+            AppLayout.php
+            GuestLayout.php
+            
+Folder PATH listing for volume OS
+Volume serial number is 50F6-8512
+C:\USERS\IAN\DESKTOP\PROJECTS\OPEN-SOURCE\SJDPP-RMS\RESOURCES\VIEWS
+¦   shell.blade.php
+¦   welcome.blade.php
+¦   
++---auth
+¦       confirm-password.blade.php
+¦       forgot-password.blade.php
+¦       login.blade.php
+¦       register.blade.php
+¦       reset-password.blade.php
+¦       verify-email.blade.php
+¦       
++---components
+¦       application-logo.blade.php
+¦       auth-session-status.blade.php
+¦       danger-button.blade.php
+¦       dropdown-link.blade.php
+¦       dropdown.blade.php
+¦       input-error.blade.php
+¦       input-label.blade.php
+¦       modal.blade.php
+¦       nav-link.blade.php
+¦       primary-button.blade.php
+¦       responsive-nav-link.blade.php
+¦       secondary-button.blade.php
+¦       text-input.blade.php
+¦       
++---layouts
+¦       app.blade.php
+¦       guest.blade.php
+¦       navigation.blade.php
+¦       
++---priest
+¦   ¦   dashboard.blade.php
+¦   ¦   shell.blade.php
+¦   ¦   
+¦   +---profile
+¦   ¦   ¦   edit.blade.php
+¦   ¦   ¦   
+¦   ¦   +---partials
+¦   ¦           delete-user-form.blade.php
+¦   ¦           update-password-form.blade.php
+¦   ¦           update-profile-information-form.blade.php
+¦   ¦           
+¦   +---records
+¦   ¦       baptismal.blade.php
+¦   ¦       burial.blade.php
+¦   ¦       confirmation.blade.php
+¦   ¦       show-baptismal.blade.php
+¦   ¦       show-burial.blade.php
+¦   ¦       show-confirmation.blade.php
+¦   ¦       show-wedding.blade.php
+¦   ¦       wedding.blade.php
+¦   ¦       
+¦   +---schedule
+¦           calendar.blade.php
+¦           index.blade.php
+¦           show.blade.php
+¦           
++---secretary
+    ¦   dashboard.blade.php
+    ¦   shell.blade.php
+    ¦   
+    +---baptismal
+    ¦       certificate.blade.php
+    ¦       create.blade.php
+    ¦       edit.blade.php
+    ¦       index.blade.php
+    ¦       show.blade.php
+    ¦       
+    +---burial
+    ¦       create.blade.php
+    ¦       edit.blade.php
+    ¦       index.blade.php
+    ¦       show.blade.php
+    ¦       
+    +---confirmation
+    ¦       create.blade.php
+    ¦       edit.blade.php
+    ¦       index.blade.php
+    ¦       show.blade.php
+    ¦       
+    +---first-communion
+    ¦       create.blade.php
+    ¦       edit.blade.php
+    ¦       index.blade.php
+    ¦       show.blade.php
+    ¦       
+    +---profile
+    ¦   ¦   edit.blade.php
+    ¦   ¦   
+    ¦   +---partials
+    ¦           delete-user-form.blade.php
+    ¦           update-password-form.blade.php
+    ¦           update-profile-information-form.blade.php
+    ¦           
+    +---schedule
+    ¦       calendar.blade.php
+    ¦       create.blade.php
+    ¦       edit.blade.php
+    ¦       index.blade.php
+    ¦       show.blade.php
+    ¦       
+    +---wedding
+            create.blade.php
+            edit.blade.php
+            index.blade.php
+            show.blade.php
+            
+Folder PATH listing for volume OS
+Volume serial number is 50F6-8512
+C:\USERS\IAN\DESKTOP\PROJECTS\OPEN-SOURCE\SJDPP-RMS\ROUTES
+    auth.php
+    console.php
+    priest.php
+    secretary.php
+    web.php
+    
+No subfolders exist 
+
+Folder PATH listing for volume OS
+Volume serial number is 50F6-8512
+C:\USERS\IAN\DESKTOP\PROJECTS\OPEN-SOURCE\SJDPP-RMS\DATABASE\MIGRATIONS
+    0001_01_01_000000_create_users_table.php
+    0001_01_01_000001_create_cache_table.php
+    0001_01_01_000002_create_jobs_table.php
+    2025_10_04_033857_create_roles_table.php
+    2025_10_04_034117_create_role_user.php
+    2025_10_04_122311_create_baptismals_table.php
+    2025_10_04_125252_create_burials_table.php
+    2025_10_04_130241_create_confirmations_table.php
+    2025_10_04_132323_create_weddings_table.php
+    2025_10_04_133246_create_schedules_table.php
+    2025_10_09_091059_create_barangays_table.php
+    2025_10_09_091101_create_chapels_table.php
+    2025_10_09_091105_create_schools_table.php
+    2025_10_09_091342_add_new_schedule_types_to_schedules_table.php
+    2025_10_09_091414_create_schedule_blessings_table.php
+    2025_10_09_091418_create_schedule_masses_table.php
+    2025_10_09_091430_create_schedule_barrio_masses_table.php
+    2025_10_09_091431_create_schedule_school_masses_table.php
+    2025_10_09_091607_add_new_schedule_fields_to_schedules_table.php
+    2025_11_04_204258_create_first_communions_table.php
+    
+No subfolders exist 
+

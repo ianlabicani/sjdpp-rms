@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\Secretary\BaptismalController;
 use App\Http\Controllers\Secretary\BurialController;
 use App\Http\Controllers\Secretary\ConfirmationController;
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 // Secretary Routes
 Route::middleware(['auth', 'verified'])->prefix('secretary')->name('secretary.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Backup Management
+    Route::post('backup/create', [BackupController::class, 'create'])->name('backup.create');
+    Route::get('backup/list', [BackupController::class, 'list'])->name('backup.list');
+    Route::get('backup/download', [BackupController::class, 'download'])->name('backup.download');
+    Route::post('backup/delete', [BackupController::class, 'delete'])->name('backup.delete');
 
     // Baptismal Records Management
     Route::get('baptismal/{baptismal}/certificate', [BaptismalController::class, 'certificate'])->name('baptismal.certificate');

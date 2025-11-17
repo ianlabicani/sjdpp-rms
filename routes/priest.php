@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\Priest\DashboardController;
 use App\Http\Controllers\Priest\ProfileController;
 use App\Http\Controllers\Priest\RecordController;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\Route;
 // Priest Routes
 Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Backup Management
+    Route::post('backup/create', [BackupController::class, 'create'])->name('backup.create');
+    Route::get('backup/list', [BackupController::class, 'list'])->name('backup.list');
+    Route::get('backup/download', [BackupController::class, 'download'])->name('backup.download');
+    Route::post('backup/delete', [BackupController::class, 'delete'])->name('backup.delete');
 
     // Schedule Management (Review & Approve/Decline)
     Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');

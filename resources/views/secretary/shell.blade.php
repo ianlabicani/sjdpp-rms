@@ -69,6 +69,10 @@
                                     <i class="fas fa-user-cog w-5 mr-3 text-blue-600"></i>
                                     <span class="font-medium">Profile Settings</span>
                                 </a>
+                                <button id="backup-btn" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
+                                    <i class="fas fa-database w-5 mr-3 text-green-600"></i>
+                                    <span class="font-medium">Backup Database</span>
+                                </button>
                                 <div class="border-t border-gray-200 my-2"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -128,6 +132,10 @@
                             <i class="fas fa-user-cog mr-2 text-blue-600"></i>Profile Settings
                         </a>
 
+                        <button id="mobile-backup-btn" class="w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
+                            <i class="fas fa-database mr-2 text-green-600"></i>Backup Database
+                        </button>
+
                         <form method="POST" action="{{ route('logout') }}" class="mt-2">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 transition">
@@ -147,6 +155,8 @@
             const recordsToggle = document.getElementById('records-toggle');
             const recordsMenu = document.getElementById('records-menu');
             const recordsChevron = document.getElementById('records-chevron');
+            const backupBtn = document.getElementById('backup-btn');
+            const mobileBackupBtn = document.getElementById('mobile-backup-btn');
 
             menuBtn.addEventListener('click', function() {
                 mobileMenu.classList.toggle('hidden');
@@ -166,6 +176,42 @@
                     recordsChevron.style.transform = 'rotate(0deg)';
                 });
             });
+
+            // Backup functionality
+            function triggerBackup() {
+                const btn = event.target.closest('button');
+                btn.disabled = true;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i><span class="font-medium">Creating backup...</span>';
+
+                fetch('{{ route("secretary.backup.create") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert('Database backup created successfully!');
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to create backup. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                });
+            }
+
+            if (backupBtn) {
+                backupBtn.addEventListener('click', triggerBackup);
+            }
+
+            if (mobileBackupBtn) {
+                mobileBackupBtn.addEventListener('click', triggerBackup);
+            }
         });
     </script>
 
