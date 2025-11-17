@@ -72,21 +72,3 @@ it('can list backup files', function () {
     expect($response->getStatusCode())->toBe(200);
     expect($response->json())->toBeArray();
 });
-
-it('can delete backup file', function () {
-    $priestRole = Role::where('name', 'priest')->first();
-    $user = User::factory()->create();
-    $user->roles()->attach($priestRole);
-
-    // Mock the backup service
-    $mock = \Mockery::mock(DatabaseBackupService::class);
-    $mock->shouldReceive('deleteBackup')->with('backup_2025-01-01_00-00-00.sql')->andReturn(true);
-    $this->app->instance(DatabaseBackupService::class, $mock);
-
-    $response = $this->actingAs($user)->postJson(route('priest.backup.delete'), [
-        'filename' => 'backup_2025-01-01_00-00-00.sql',
-    ]);
-
-    expect($response->getStatusCode())->toBe(200);
-    expect($response->json('message'))->toBe('Backup deleted successfully');
-});

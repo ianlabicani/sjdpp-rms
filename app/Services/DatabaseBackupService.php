@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use Carbon\Carbon;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseBackupService
 {
@@ -21,46 +20,73 @@ class DatabaseBackupService
         $filename = "backup_{$timestamp}.sql";
         $backupPath = "{$backupDirectory}/{$filename}";
 
-        $host = config('database.connections.mysql.host');
-        $database = config('database.connections.mysql.database');
-        $user = config('database.connections.mysql.username');
-        $password = config('database.connections.mysql.password');
-        $port = config('database.connections.mysql.port', 3306);
-
-        // Build mysqldump command
-        $command = [
-            'mysqldump',
-            '--host='.$host,
-            '--port='.$port,
-            '--user='.$user,
-        ];
-
-        if ($password) {
-            $command[] = '--password='.$password;
-        }
-
-        $command[] = $database;
-
         try {
-            $process = new Process($command);
-            $process->setTimeout(null);
-            $process->run();
-
-            if (! $process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
+            $backupContent = $this->generateBackup();
 
             // Write the backup to file
-            file_put_contents($backupPath, $process->getOutput());
+            file_put_contents($backupPath, $backupContent);
+
+            // Verify file was created and has content
+            if (! file_exists($backupPath) || filesize($backupPath) === 0) {
+                throw new \Exception('Backup file was not created or is empty');
+            }
 
             // Log the backup
-            \Log::info("Database backup created successfully: {$filename}");
+            \Log::info("Database backup created successfully: {$filename}", [
+                'size' => filesize($backupPath),
+                'path' => $backupPath,
+            ]);
 
             return $filename;
         } catch (\Exception $e) {
+            // Clean up empty file if it exists
+            if (file_exists($backupPath)) {
+                unlink($backupPath);
+            }
+
             \Log::error("Database backup failed: {$e->getMessage()}");
+
             throw $e;
         }
+    }
+
+    private function generateBackup(): string
+    {
+        $database = config('database.connections.mysql.database');
+        $backup = "-- Database Backup\n";
+        $backup .= '-- Generated at '.Carbon::now()->toDateTimeString()."\n";
+        $backup .= "-- Database: {$database}\n\n";
+
+        // Get all tables
+        $tables = DB::select('SHOW TABLES');
+
+        foreach ($tables as $table) {
+            $tableName = array_values((array) $table)[0];
+
+            // Get table structure
+            $createTableResult = DB::select("SHOW CREATE TABLE {$tableName}");
+            $backup .= "\n\n-- Table structure for table `{$tableName}`\n";
+            $backup .= "DROP TABLE IF EXISTS `{$tableName}`;\n";
+            $backup .= $createTableResult[0]->{'Create Table'}.";'\n\n";
+
+            // Get table data
+            $rows = DB::table($tableName)->get();
+
+            if (count($rows) > 0) {
+                $backup .= "-- Data for table `{$tableName}`\n";
+
+                foreach ($rows as $row) {
+                    $values = [];
+                    foreach ($row as $value) {
+                        $values[] = $value === null ? 'NULL' : "'".addslashes($value)."'";
+                    }
+                    $columns = implode(', ', array_map(fn ($col) => "`{$col}`", array_keys((array) $row)));
+                    $backup .= "INSERT INTO `{$tableName}` ({$columns}) VALUES (".implode(', ', $values).");\n";
+                }
+            }
+        }
+
+        return $backup;
     }
 
     public function getBackups(): array
@@ -89,32 +115,13 @@ class DatabaseBackupService
         return $backups;
     }
 
-    public function deleteBackup(string $filename): bool
-    {
-        $backupDirectory = storage_path('backups');
-        $filePath = "{$backupDirectory}/{$filename}";
-
-        // Security: ensure the file is in the backups directory
-        if (! str_starts_with(realpath($filePath) ?? '', realpath($backupDirectory))) {
-            throw new \Exception('Invalid backup file');
-        }
-
-        if (file_exists($filePath)) {
-            \Log::info("Database backup deleted: {$filename}");
-
-            return unlink($filePath);
-        }
-
-        return false;
-    }
-
     public function downloadBackup(string $filename): string
     {
         $backupDirectory = storage_path('backups');
         $filePath = "{$backupDirectory}/{$filename}";
 
         // Security: ensure the file is in the backups directory
-        if (! str_starts_with(realpath($filePath) ?? '', realpath($backupDirectory))) {
+        if (! str_starts_with(realpath($filePath) ?? '', realpath($backupDirectory) ?? '')) {
             throw new \Exception('Invalid backup file');
         }
 

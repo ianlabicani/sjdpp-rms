@@ -23,6 +23,10 @@
                         <i class="fas fa-calendar-check mr-1 md:mr-2"></i><span class="hidden md:inline">Schedules</span>
                     </a>
 
+                    <a href="{{ route('priest.backup.index') }}" class="font-medium text-sm md:text-base transition {{ request()->routeIs('priest.backup.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                        <i class="fas fa-database mr-1 md:mr-2"></i><span class="hidden md:inline">Backups</span>
+                    </a>
+
                     <!-- Profile Dropdown -->
                     <div class="relative group">
                         <button class="font-medium text-sm md:text-base text-gray-700 hover:text-blue-600 transition flex items-center">
@@ -35,10 +39,13 @@
                                     <i class="fas fa-user-cog w-5 mr-3 text-blue-600"></i>
                                     <span class="font-medium">Profile Settings</span>
                                 </a>
-                                <button id="backup-btn" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
-                                    <i class="fas fa-database w-5 mr-3 text-green-600"></i>
-                                    <span class="font-medium">Backup Database</span>
-                                </button>
+                                <form method="POST" action="{{ route('priest.backup.create') }}" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
+                                        <i class="fas fa-database w-5 mr-3 text-green-600"></i>
+                                        <span class="font-medium">Backup Database</span>
+                                    </button>
+                                </form>
                                 <div class="border-t border-gray-200 my-2"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -69,14 +76,21 @@
                         <i class="fas fa-calendar-check mr-2"></i>Schedules
                     </a>
 
+                    <a href="{{ route('priest.backup.index') }}" class="block px-4 py-2 rounded-lg font-medium transition {{ request()->routeIs('priest.backup.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100' }}">
+                        <i class="fas fa-database mr-2"></i>Backups
+                    </a>
+
                     <div class="border-t border-gray-200 my-2 pt-2">
                         <a href="{{ route('priest.profile.edit') }}" class="block px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
                             <i class="fas fa-user-cog mr-2 text-blue-600"></i>Profile Settings
                         </a>
 
-                        <button id="mobile-backup-btn" class="w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
-                            <i class="fas fa-database mr-2 text-green-600"></i>Backup Database
-                        </button>
+                        <form method="POST" action="{{ route('priest.backup.create') }}" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fas fa-database mr-2 text-green-600"></i>Backup Database
+                            </button>
+                        </form>
 
                         <form method="POST" action="{{ route('logout') }}" class="mt-2">
                             @csrf
@@ -94,8 +108,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const backupBtn = document.getElementById('backup-btn');
-            const mobileBackupBtn = document.getElementById('mobile-backup-btn');
 
             menuBtn.addEventListener('click', function() {
                 mobileMenu.classList.toggle('hidden');
@@ -108,42 +120,6 @@
                     mobileMenu.classList.add('hidden');
                 });
             });
-
-            // Backup functionality
-            function triggerBackup() {
-                const btn = event.target.closest('button');
-                btn.disabled = true;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin w-5 mr-3"></i><span class="font-medium">Creating backup...</span>';
-
-                fetch('{{ route("priest.backup.create") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                    }
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alert('Database backup created successfully!');
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to create backup. Please try again.');
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                });
-            }
-
-            if (backupBtn) {
-                backupBtn.addEventListener('click', triggerBackup);
-            }
-
-            if (mobileBackupBtn) {
-                mobileBackupBtn.addEventListener('click', triggerBackup);
-            }
         });
     </script>
 

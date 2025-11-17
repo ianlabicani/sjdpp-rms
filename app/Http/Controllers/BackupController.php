@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\DatabaseBackupService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -12,15 +13,22 @@ class BackupController extends Controller
 {
     public function __construct(protected DatabaseBackupService $backupService) {}
 
-    public function create(): Response
+    public function create(Request $request): RedirectResponse
     {
         try {
-            $filename = $this->backupService->createBackup();
+            $this->backupService->createBackup();
 
-            return response('Database backup created successfully.', 200)
-                ->header('X-Backup-File', $filename);
+            $redirectRoute = $request->user()->hasRole('priest')
+                ? 'priest.backup.index'
+                : 'secretary.backup.index';
+
+            return redirect()->route($redirectRoute)->with('success', 'Database backup created successfully.');
         } catch (\Exception $e) {
-            return response('Failed to create backup: '.$e->getMessage(), 500);
+            $redirectRoute = $request->user()->hasRole('priest')
+                ? 'priest.backup.index'
+                : 'secretary.backup.index';
+
+            return redirect()->route($redirectRoute)->with('error', 'Failed to create backup: '.$e->getMessage());
         }
     }
 
@@ -51,23 +59,6 @@ class BackupController extends Controller
             ]);
         } catch (\Exception $e) {
             return response('Download failed: '.$e->getMessage(), 500);
-        }
-    }
-
-    public function delete(Request $request): JsonResponse
-    {
-        try {
-            $filename = $request->input('filename');
-
-            if (! $filename) {
-                return response()->json(['error' => 'Filename is required'], 400);
-            }
-
-            $this->backupService->deleteBackup($filename);
-
-            return response()->json(['message' => 'Backup deleted successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 }
