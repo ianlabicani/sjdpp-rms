@@ -24,9 +24,10 @@ it('priest can trigger database backup', function () {
     $mock->shouldReceive('createBackup')->andReturn('backup_2025-01-01_00-00-00.sql');
     $this->app->instance(DatabaseBackupService::class, $mock);
 
-    $response = $this->actingAs($user)->postJson(route('priest.backup.create'));
+    $response = $this->actingAs($user)->post(route('priest.backup.create'));
 
-    expect($response->getStatusCode())->toBe(200);
+    expect($response->getStatusCode())->toBe(302);
+    expect($response->getSession()->get('success'))->not->toBeNull();
 });
 
 it('secretary can trigger database backup', function () {
@@ -39,15 +40,16 @@ it('secretary can trigger database backup', function () {
     $mock->shouldReceive('createBackup')->andReturn('backup_2025-01-01_00-00-00.sql');
     $this->app->instance(DatabaseBackupService::class, $mock);
 
-    $response = $this->actingAs($user)->postJson(route('secretary.backup.create'));
+    $response = $this->actingAs($user)->post(route('secretary.backup.create'));
 
-    expect($response->getStatusCode())->toBe(200);
+    expect($response->getStatusCode())->toBe(302);
+    expect($response->getSession()->get('success'))->not->toBeNull();
 });
 
 it('unauthenticated user cannot backup database', function () {
-    $response = $this->postJson(route('priest.backup.create'));
+    $response = $this->post(route('priest.backup.create'));
 
-    expect($response->getStatusCode())->toBe(401);
+    expect($response->getStatusCode())->toBe(302);
 });
 
 it('can list backup files', function () {

@@ -67,7 +67,7 @@ class DatabaseBackupService
             $createTableResult = DB::select("SHOW CREATE TABLE {$tableName}");
             $backup .= "\n\n-- Table structure for table `{$tableName}`\n";
             $backup .= "DROP TABLE IF EXISTS `{$tableName}`;\n";
-            $backup .= $createTableResult[0]->{'Create Table'}.";'\n\n";
+            $backup .= $createTableResult[0]->{'Create Table'}.";\n\n";
 
             // Get table data
             $rows = DB::table($tableName)->get();

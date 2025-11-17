@@ -12,6 +12,7 @@ class BackupViewController extends Controller
     public function index()
     {
         $backups = $this->backupService->getBackups();
+
         return view('secretary.backup.index', compact('backups'));
     }
 }

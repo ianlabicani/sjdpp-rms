@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->prefix('priest')->name('priest.')->grou
     Route::post('backup/create', [BackupController::class, 'create'])->name('backup.create');
     Route::get('backup/list', [BackupController::class, 'list'])->name('backup.list');
     Route::get('backup/download', [BackupController::class, 'download'])->name('backup.download');
+    Route::post('backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
 
     // Schedule Management (Review & Approve/Decline)
     Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');

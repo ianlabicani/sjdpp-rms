@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DatabaseBackupService;
+use App\Services\DatabaseRestoreService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +12,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BackupController extends Controller
 {
-    public function __construct(protected DatabaseBackupService $backupService) {}
+    public function __construct(
+        protected DatabaseBackupService $backupService,
+        protected DatabaseRestoreService $restoreService
+    ) {}
 
     public function create(Request $request): RedirectResponse
     {
@@ -59,6 +63,35 @@ class BackupController extends Controller
             ]);
         } catch (\Exception $e) {
             return response('Download failed: '.$e->getMessage(), 500);
+        }
+    }
+
+    public function restore(Request $request): RedirectResponse
+    {
+        try {
+            $filename = $request->input('filename');
+
+            if (! $filename) {
+                throw new \Exception('Filename is required');
+            }
+
+            $result = $this->restoreService->restore($filename);
+
+            $redirectRoute = $request->user()->hasRole('priest')
+                ? 'priest.backup.index'
+                : 'secretary.backup.index';
+
+            if ($result['success']) {
+                return redirect()->route($redirectRoute)->with('success', $result['message']);
+            } else {
+                return redirect()->route($redirectRoute)->with('error', $result['message']);
+            }
+        } catch (\Exception $e) {
+            $redirectRoute = $request->user()->hasRole('priest')
+                ? 'priest.backup.index'
+                : 'secretary.backup.index';
+
+            return redirect()->route($redirectRoute)->with('error', 'Restore failed: '.$e->getMessage());
         }
     }
 }
