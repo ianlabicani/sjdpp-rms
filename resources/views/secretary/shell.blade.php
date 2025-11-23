@@ -57,9 +57,29 @@
                         <i class="fas fa-calendar-alt mr-1 md:mr-2"></i><span class="hidden md:inline">Schedule</span>
                     </a>
 
-                    <a href="{{ route('secretary.backup.index') }}" class="font-medium text-sm md:text-base transition {{ request()->routeIs('secretary.backup.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
-                        <i class="fas fa-database mr-1 md:mr-2"></i><span class="hidden md:inline">Backups</span>
-                    </a>
+                    <!-- Backups Dropdown -->
+                    <div class="relative group">
+                        <button class="font-medium text-sm md:text-base transition flex items-center {{ request()->routeIs('secretary.backup.*') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-600' }}">
+                            <i class="fas fa-database mr-1 md:mr-2"></i><span class="hidden md:inline">Backups</span>
+                            <i class="fas fa-chevron-down ml-0.5 md:ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="{{ route('secretary.backup.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                                    <i class="fas fa-list w-5 mr-3 text-blue-600"></i>
+                                    <span class="font-medium">Backup List</span>
+                                </a>
+
+                                <form method="POST" action="{{ route('secretary.backup.create') }}">
+                                    @csrf
+                                    <button type="submit" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
+                                        <i class="fas fa-plus-circle w-5 mr-3 text-green-600"></i>
+                                        <span class="font-medium">Create Backup</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Profile Dropdown -->
                     <div class="relative group">
@@ -73,14 +93,9 @@
                                     <i class="fas fa-user-cog w-5 mr-3 text-blue-600"></i>
                                     <span class="font-medium">Profile Settings</span>
                                 </a>
-                                <form method="POST" action="{{ route('secretary.backup.create') }}" style="display: inline;">
-                                    @csrf
-                                    <button type="submit" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
-                                        <i class="fas fa-database w-5 mr-3 text-green-600"></i>
-                                        <span class="font-medium">Backup Database</span>
-                                    </button>
-                                </form>
+
                                 <div class="border-t border-gray-200 my-2"></div>
+
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition">
@@ -106,6 +121,7 @@
                         <i class="fas fa-home mr-2"></i>Dashboard
                     </a>
 
+                    <!-- Mobile Records Dropdown -->
                     <div class="border-b border-gray-200 pb-2">
                         <button id="records-toggle" class="w-full flex items-center px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
                             <i class="fas fa-book mr-2"></i>Records
@@ -134,21 +150,31 @@
                         <i class="fas fa-calendar-alt mr-2"></i>Schedule
                     </a>
 
-                    <a href="{{ route('secretary.backup.index') }}" class="block px-4 py-2 rounded-lg font-medium transition {{ request()->routeIs('secretary.backup.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100' }}">
-                        <i class="fas fa-database mr-2"></i>Backups
-                    </a>
+                    <!-- Mobile Backups Dropdown -->
+                    <div class="border-b border-gray-200 pb-2">
+                        <button id="mobile-backup-toggle" class="w-full flex items-center px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
+                            <i class="fas fa-database mr-2"></i>Backups
+                            <i class="fas fa-chevron-down ml-auto text-xs transition" id="mobile-backup-chevron"></i>
+                        </button>
+
+                        <div id="mobile-backup-menu" class="hidden mt-2 space-y-1 ml-4">
+                            <a href="{{ route('secretary.backup.index') }}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                                <i class="fas fa-list mr-2 text-blue-600"></i>Backup List
+                            </a>
+
+                            <form method="POST" action="{{ route('secretary.backup.create') }}">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-600">
+                                    <i class="fas fa-plus-circle mr-2 text-green-600"></i>Create Backup
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
                     <div class="border-t border-gray-200 my-2 pt-2">
                         <a href="{{ route('secretary.profile.edit') }}" class="block px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
                             <i class="fas fa-user-cog mr-2 text-blue-600"></i>Profile Settings
                         </a>
-
-                        <form method="POST" action="{{ route('secretary.backup.create') }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
-                                <i class="fas fa-database mr-2 text-green-600"></i>Backup Database
-                            </button>
-                        </form>
 
                         <form method="POST" action="{{ route('logout') }}" class="mt-2">
                             @csrf
@@ -166,26 +192,39 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const recordsToggle = document.getElementById('records-toggle');
-            const recordsMenu = document.getElementById('records-menu');
-            const recordsChevron = document.getElementById('records-chevron');
 
             menuBtn.addEventListener('click', function() {
                 mobileMenu.classList.toggle('hidden');
             });
+
+            const recordsToggle = document.getElementById('records-toggle');
+            const recordsMenu = document.getElementById('records-menu');
+            const recordsChevron = document.getElementById('records-chevron');
 
             recordsToggle.addEventListener('click', function() {
                 recordsMenu.classList.toggle('hidden');
                 recordsChevron.style.transform = recordsMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
             });
 
-            // Close menu when a link is clicked
+            const backupToggle = document.getElementById('mobile-backup-toggle');
+            const backupMenu = document.getElementById('mobile-backup-menu');
+            const backupChevron = document.getElementById('mobile-backup-chevron');
+
+            backupToggle.addEventListener('click', function() {
+                backupMenu.classList.toggle('hidden');
+                backupChevron.style.transform = backupMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+
             const menuLinks = mobileMenu.querySelectorAll('a');
             menuLinks.forEach(link => {
                 link.addEventListener('click', function() {
                     mobileMenu.classList.add('hidden');
+
                     recordsMenu.classList.add('hidden');
                     recordsChevron.style.transform = 'rotate(0deg)';
+
+                    backupMenu.classList.add('hidden');
+                    backupChevron.style.transform = 'rotate(0deg)';
                 });
             });
         });
